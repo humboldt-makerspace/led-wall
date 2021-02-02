@@ -28,12 +28,12 @@ void initLeds (void)
 
 void initWallStatus (void)
 {
-	Interface::mode = WallMode::LIGHT_SHOW_PRIDE;
+	Interface::mode = WallMode::LIGHT_SHOW_MATRIX_VIBE;
 	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
 	Interface::brightness = 255;
 	ColorGradient::changeColorGradient(Interface::cmode);
 	Figures::defineAlphabet();
-	Moving::initDots();
+	Moving::resetDots();
 }
 
 void Setup::initWifi (void)

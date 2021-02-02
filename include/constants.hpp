@@ -62,26 +62,30 @@
 #define TIME_ZONE				1
 #define DST						1
 
-/* face factors, higher value means faster fading */
+/* fade factors, higher value means faster fading */
 #define FADE_FACTOR_OFF			100
-#define FADE_FACTOR_CLOCK		50
+#define FADE_FACTOR_CLOCK		60
 #define FADE_FACTOR_BARS		150
 #define FADE_FACTOR_DOTS		100
 
 /* moving dots */
 #define MAX_NUM_DOTS_MATRIX		30
 #define MAX_NUM_DOTS_PROCESSOR	60
-#define OUT_COUNTER				20
-#define WEAKEN_FACTOR			0.0
+#define MAX_NUM_DOTS_CIRCLE		8
+#define MAX_NUM_DOTS_NETWORK	60
+#define MAX_NUM_DOTS			100
+#define WEAKEN_FACTOR			0.00
 #define LAST_FIELDS_NUM			12
-#define PROCESSOR_SIZE			6
-
+#define PROCESSOR_SIZE			8
 
 /* lists all features of led wall */
 typedef enum modeTypes {
 	LIGHT_SHOW_PRIDE,
 	LIGHT_SHOW_STATIC_COLOR,
 	LIGHT_SHOW_MATRIX_VIBE,
+	LIGHT_SHOW_PROCESSOR,
+	LIGHT_SHOW_CIRCLE,
+	LIGHT_SHOW_NETWORK,
 	CLOCK,
 	TEST,
 	AUDIO_VISUALIZER
@@ -111,10 +115,5 @@ typedef enum figures {
 typedef enum directions {
 	UP, DOWN, LEFT, RIGHT, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
 } Direction;
-
-/* sides of led wall */
-typedef enum side {
-	NORTH, EAST, SOUTH, WEST
-} Side;
 
 #endif

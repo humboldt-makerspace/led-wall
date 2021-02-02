@@ -1,129 +1,140 @@
 #include "utils/Moving.hpp"
 #include "system/Interface.hpp"
 
-Dot Moving::matrixDots[MAX_NUM_DOTS_MATRIX];
+Dot Moving::dots[MAX_NUM_DOTS];
+int Moving::activeDots = 0;
+int Moving::maxNumDots = 0;
 
-void Moving::initDots (void)
+void Moving::resetDots (void)
 {
-	for (int i = 0; i < MAX_NUM_DOTS_MATRIX; i++) {
-		Moving::matrixDots[i].p.x = -1;
-		Moving::matrixDots[i].p.y = -1;
+	for (int i = 0; i < MAX_NUM_DOTS; i++) {
+		Moving::dots[i].p.x = -1;
+		Moving::dots[i].p.y = -1;
 		for (int j = 0; j < LAST_FIELDS_NUM; j++) {
-			Moving::matrixDots[i].last[j].x = -1;
-			Moving::matrixDots[i].last[j].y = -1;
+			Moving::dots[i].last[j].x = -1;
+			Moving::dots[i].last[j].y = -1;
 		}
-		Moving::matrixDots[i].outCounter = -1;
-		Moving::matrixDots[i].bufferIndex = 0;
+		Moving::dots[i].outCounter = -1;
+		Moving::dots[i].bufferIndex = 0;
 	}
+	Moving::activeDots = 0;
 }
 
-void Moving::createDot (int x, int y)
+void Moving::createDot (int x, int y, Direction dir)
 {
-	for (int i = 0; i < MAX_NUM_DOTS_MATRIX; i++) {
-		if (Moving::matrixDots[i].outCounter != -1) continue;
-		Moving::matrixDots[i].p.x = x;
-		Moving::matrixDots[i].p.y = y;
-		Moving::matrixDots[i].outCounter = 0;
+	if (Moving::activeDots >= Moving::maxNumDots) return;
+	for (int i = 0; i < MAX_NUM_DOTS; i++) {
+		if (Moving::dots[i].outCounter != -1) continue;
+		Moving::dots[i].p.x = x;
+		Moving::dots[i].p.y = y;
+		Moving::dots[i].outCounter = 0;
+		Moving::dots[i].dir = dir;
 		break;
 	}
+	Moving::activeDots++;
 }
 
-void Moving::createDot (int x, int y, Side origin)
+void Moving::removeDot (Dot* dot)
 {
-	for (int i = 0; i < MAX_NUM_DOTS_MATRIX; i++) {
-		if (Moving::matrixDots[i].outCounter != -1) continue;
-		Moving::matrixDots[i].p.x = x;
-		Moving::matrixDots[i].p.y = y;
-		Moving::matrixDots[i].outCounter = 0;
-		break;
-	}
+	dot->p.x = -1;
+	dot->p.y = -1;
 }
 
-void Moving::autoResetDots (void)
+void Moving::autoResetDot (Dot* dot)
 {
-	for (int i = 0; i < MAX_NUM_DOTS_MATRIX; i++) {
-		if (Moving::matrixDots[i].outCounter == -1) continue;
-		if (Maths::outOfBounds(Moving::matrixDots[i].p.x, Moving::matrixDots[i].p.y)) {
-			if (Moving::matrixDots[i].outCounter >= OUT_COUNTER) {
-				Moving::matrixDots[i].p.x = -1;
-				Moving::matrixDots[i].p.y = -1;
-				for (int j = 0; j < LAST_FIELDS_NUM; j++) {
-					Moving::matrixDots[i].last[j].x = -1;
-					Moving::matrixDots[i].last[j].y = -1;
-				}
-				Moving::matrixDots[i].outCounter = -1;
+	if (dot->outCounter == -1) return;
+	if (Maths::outOfBounds(dot->p.x, dot->p.y)) {
+		if (dot->outCounter >= LAST_FIELDS_NUM) {
+			dot->p.x = -1;
+			dot->p.y = -1;
+			for (int j = 0; j < LAST_FIELDS_NUM; j++) {
+				dot->last[j].x = -1;
+				dot->last[j].y = -1;
 			}
-			else Moving::matrixDots[i].outCounter++;
+			dot->outCounter = -1;
+			Moving::activeDots--;
 		}
+		else dot->outCounter++;
 	}
 }
 
-void Moving::updateBuffer (int index, Point p)
+void Moving::updateBuffer (Dot* dot)
 {
-	Moving::matrixDots[index].last[Moving::matrixDots[index].bufferIndex] = p;
-	Moving::matrixDots[index].bufferIndex == LAST_FIELDS_NUM - 1 ? Moving::matrixDots[index].bufferIndex = 0 : Moving::matrixDots[index].bufferIndex++;
+	dot->last[dot->bufferIndex] = dot->p;
+	dot->bufferIndex == LAST_FIELDS_NUM - 1 ? dot->bufferIndex = 0 : dot->bufferIndex++;
 }
 
-void Moving::showDot (int i)
+void Moving::showDot (Dot* dot)
 {
-	if (Moving::matrixDots[i].outCounter == -1) return;
+	if (dot->outCounter == -1) return;
 	for (int j = 0; j < LAST_FIELDS_NUM; j++) {
 		CRGB weakC;
-		weakC.r = ColorGradient::colors[Moving::matrixDots[i].last[j].x][Moving::matrixDots[i].last[j].y].r * WEAKEN_FACTOR;
-		weakC.g = ColorGradient::colors[Moving::matrixDots[i].last[j].x][Moving::matrixDots[i].last[j].y].g * WEAKEN_FACTOR;
-		weakC.b = ColorGradient::colors[Moving::matrixDots[i].last[j].x][Moving::matrixDots[i].last[j].y].b * WEAKEN_FACTOR;
-		Interface::fadeToColor(Moving::matrixDots[i].last[j].x, Moving::matrixDots[i].last[j].y, weakC, FADE_FACTOR_DOTS);
+		weakC.r = ColorGradient::colors[dot->last[j].x][dot->last[j].y].r * WEAKEN_FACTOR;
+		weakC.g = ColorGradient::colors[dot->last[j].x][dot->last[j].y].g * WEAKEN_FACTOR;
+		weakC.b = ColorGradient::colors[dot->last[j].x][dot->last[j].y].b * WEAKEN_FACTOR;
+		Interface::fadeToColor(dot->last[j].x, dot->last[j].y, weakC, FADE_FACTOR_DOTS);
 	}
-	if (!Maths::outOfBounds(Moving::matrixDots[i].p.x, Moving::matrixDots[i].p.y)) {
-		Interface::ledOn(Moving::matrixDots[i].p.x, Moving::matrixDots[i].p.y, ColorGradient::colors[Moving::matrixDots[i].p.x][Moving::matrixDots[i].p.y]);
+	if (!Maths::outOfBounds(dot->p.x, dot->p.y)) {
+		Interface::ledOn(dot->p.x, dot->p.y, ColorGradient::colors[dot->p.x][dot->p.y]);
 	}
 }
 
-void Moving::moveDot (int index, Direction dir)
+void Moving::showDot (Dot* dot, CRGB color)
 {
-	if (Maths::outOfBounds(Moving::matrixDots[index].p.x, Moving::matrixDots[index].p.y)) return;
+	if (dot->outCounter == -1) return;
+	for (int j = 0; j < LAST_FIELDS_NUM; j++) {
+		CRGB weakC;
+		weakC.r = ColorGradient::colors[dot->last[j].x][dot->last[j].y].r * WEAKEN_FACTOR;
+		weakC.g = ColorGradient::colors[dot->last[j].x][dot->last[j].y].g * WEAKEN_FACTOR;
+		weakC.b = ColorGradient::colors[dot->last[j].x][dot->last[j].y].b * WEAKEN_FACTOR;
+		Interface::fadeToColor(dot->last[j].x, dot->last[j].y, weakC, FADE_FACTOR_DOTS);
+	}
+	if (!Maths::outOfBounds(dot->p.x, dot->p.y)) {
+		Interface::ledOn(dot->p.x, dot->p.y, color);
+	}
+}
 
-	Point p = {
-		.x = Moving::matrixDots[index].p.x,
-		.y = Moving::matrixDots[index].p.y
-	};
-	Moving::updateBuffer(index, p);
+void Moving::moveDot (Dot* dot)
+{
+	if (Maths::outOfBounds(dot->p.x, dot->p.y)) return;
 
-	switch (dir) {
+	Moving::updateBuffer(dot);
+
+	switch (dot->dir) {
 		case UP: {
-			Moving::matrixDots[index].p.y++;
+			dot->p.y++;
 			break;
 		}
 		case DOWN: {
-			Moving::matrixDots[index].p.y--;
+			dot->p.y--;
 			break;
 		}
 		case RIGHT: {
-			Moving::matrixDots[index].p.x++;
+			dot->p.x++;
 			break;
 		}
 		case LEFT: {
-			Moving::matrixDots[index].p.x--;
+			dot->p.x--;
 			break;
 		}
 		case UP_RIGHT: {
-			Moving::matrixDots[index].p.x++;
-			Moving::matrixDots[index].p.y++;
+			dot->p.x++;
+			dot->p.y++;
 			break;
 		}
 		case UP_LEFT: {
-			Moving::matrixDots[index].p.x--;
-			Moving::matrixDots[index].p.y++;
+			dot->p.x--;
+			dot->p.y++;
 			break;
 		}
 		case DOWN_RIGHT: {
-			Moving::matrixDots[index].p.x++;
-			Moving::matrixDots[index].p.y--;
+			dot->p.x++;
+			dot->p.y--;
 			break;
 		}
 		case DOWN_LEFT: {
-			Moving::matrixDots[index].p.x--;
-			Moving::matrixDots[index].p.y--;
+			dot->p.x--;
+			dot->p.y--;
 			break;
 		}
 		default: {

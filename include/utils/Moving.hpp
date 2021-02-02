@@ -9,17 +9,19 @@ private:
 
 public:
 	/* variables */
-	static Dot matrixDots[MAX_NUM_DOTS_MATRIX];
-	static Dot processorDots[MAX_NUM_DOTS_PROCESSOR];
+	static Dot dots[MAX_NUM_DOTS];
+	static int activeDots;
+	static int maxNumDots;
 
 	/* functions */
-	static void initDots (void);
-	static void createDot (int x, int y);
-	static void createDot (int x, int y, Side origin);
-	static void autoResetDots (void);
-	static void moveDot (int index, Direction dir);
-	static void updateBuffer (int index, Point p);
-	static void showDot (int i);
+	static void resetDots (void);
+	static void createDot (int x, int y, Direction dir);
+	static void removeDot (Dot* dot);
+	static void autoResetDot (Dot* dot);
+	static void moveDot (Dot* dot);
+	static void updateBuffer (Dot* dot);
+	static void showDot (Dot* dot);
+	static void showDot (Dot* dot, CRGB color);
 };
 
 #endif

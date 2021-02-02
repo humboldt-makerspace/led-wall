@@ -75,6 +75,57 @@ void Interface::changeBrightness (void)
 	FastLED.setBrightness(brightness);
 }
 
+void initColors (void)
+{
+	for (int i = 0; i < WALL_WIDTH; i++) {
+		for (int j = 0; j < WALL_HEIGHT; j++) {
+			CRGB weakC;
+			weakC.r = ColorGradient::colors[i][j].r * WEAKEN_FACTOR;
+			weakC.g = ColorGradient::colors[i][j].g * WEAKEN_FACTOR;
+			weakC.b = ColorGradient::colors[i][j].b * WEAKEN_FACTOR;
+			Interface::ledOn(i, j, weakC);
+		}
+	}
+}
+
+void setModeValues (WallMode mode)
+{
+	switch (mode) {
+		case LIGHT_SHOW_CIRCLE: {
+			initColors();
+			Moving::resetDots();
+			for (int i = 0; i < MAX_NUM_DOTS_CIRCLE; i++) {
+				Moving::dots[i].p.x = i;
+				Moving::dots[i].p.y = i;
+				Moving::dots[i].outCounter = 0;
+				Moving::dots[i].dir = UP;
+			}
+			break;
+		}
+		case LIGHT_SHOW_MATRIX_VIBE: {
+			initColors();
+			Moving::resetDots();
+			Moving::maxNumDots = MAX_NUM_DOTS_MATRIX;
+			break;
+		}
+		case LIGHT_SHOW_PROCESSOR: {
+			initColors();
+			Moving::resetDots();
+			Moving::maxNumDots = MAX_NUM_DOTS_PROCESSOR;
+			break;
+		}
+		case LIGHT_SHOW_NETWORK: {
+			initColors();
+			Moving::resetDots();
+			Moving::maxNumDots = MAX_NUM_DOTS_NETWORK;
+			break;
+		}
+		default: {
+			break;
+		}
+	}
+}
+
 void Interface::changeMode (void)
 {
 	if (mode == WallMode::AUDIO_VISUALIZER) mode = WallMode::LIGHT_SHOW_PRIDE;
@@ -83,6 +134,7 @@ void Interface::changeMode (void)
 		tmp++;
 		mode = (WallMode) tmp;
 	}
+	setModeValues(mode);
 	Interface::allLedsOff();
 }
 

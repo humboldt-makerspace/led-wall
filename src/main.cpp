@@ -23,6 +23,14 @@ void loop ()
 			LightShow::matrixVibe();
 			break;
 		}
+		case LIGHT_SHOW_PROCESSOR: {
+			LightShow::processorAnimation();
+			break;
+		}
+		case LIGHT_SHOW_CIRCLE: {
+			LightShow::circling();
+			break;
+		}
 		case CLOCK: {
 			Clock::showTime();
 			break;
@@ -39,9 +47,5 @@ void loop ()
 			break;
 		}
 	}
-	if (Interface::mode != LIGHT_SHOW_MATRIX_VIBE && !LightShow::needToInit) {
-		LightShow::needToInit = true;
-	}
 	FastLED.show();
-	FastLED.delay(1);
 }

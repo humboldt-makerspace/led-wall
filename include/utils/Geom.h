@@ -13,7 +13,7 @@ typedef struct dot {
 	Point last[LAST_FIELDS_NUM];
 	int outCounter;
 	int bufferIndex;
-	Side origin;
+	Direction dir;
 } Dot;
 
 #endif
