@@ -44,9 +44,12 @@
 #define BRIGHTNESS_DEC			20
 
 /* parameters for figures */
-#define NUM_FIGURES				36
-#define FIGURE_WIDTH			7
-#define FIGURE_HEIGHT			16
+#define NUM_FIGURES				38
+#define NUM_BIG_NUM				10
+#define BIG_NUM_WIDTH			7
+#define BIG_NUM_HEIGHT			16
+#define FIGURE_WIDTH			5
+#define FIGURE_HEIGHT			7
 
 /* parameters for clock */
 #define HR_1_POS				0
@@ -55,7 +58,7 @@
 #define MIN_2_POS				28
 #define SEC_1_POS				40
 #define SEC_2_POS				48
-#define NUMBER_HEIGHT			1
+#define NUMBER_LEVEL			1
 #define COLON_1_POS				17
 #define COLON_2_POS				37
 #define COLON_HEIGHT			7
@@ -108,8 +111,12 @@ typedef enum colors {
 /* all figures that be displayed on led wall */
 typedef enum figures {
 	N0, N1, N2, N3, N4, N5, N6, N7, N8, N9,
-	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST
 } Figure;
+
+typedef enum bigNumbers {
+	Z0, Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9
+} BigNumber;
 
 /* directions for moving a dot */
 typedef enum directions {

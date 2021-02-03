@@ -16,24 +16,16 @@ void Clock::showTime (void)
 {	
 	getTime();
 	
-	Figures::displayFigure((Figure)(gmtm->tm_hour / 10), HR_1_POS, NUMBER_HEIGHT);
-	Figures::displayFigure((Figure)(gmtm->tm_hour % 10), HR_2_POS, NUMBER_HEIGHT);
+	Figures::displayNumber((BigNumber)(gmtm->tm_hour / 10), HR_1_POS, NUMBER_LEVEL);
+	Figures::displayNumber((BigNumber)(gmtm->tm_hour % 10), HR_2_POS, NUMBER_LEVEL);
 
 	Figures::displayColon(COLON_1_POS, COLON_HEIGHT);
 
-	Figures::displayFigure((Figure)(gmtm->tm_min / 10), MIN_1_POS, NUMBER_HEIGHT);
-	Figures::displayFigure((Figure)(gmtm->tm_min % 10), MIN_2_POS, NUMBER_HEIGHT);
+	Figures::displayNumber((BigNumber)(gmtm->tm_min / 10), MIN_1_POS, NUMBER_LEVEL);
+	Figures::displayNumber((BigNumber)(gmtm->tm_min % 10), MIN_2_POS, NUMBER_LEVEL);
 
 	Figures::displayColon(COLON_2_POS, COLON_HEIGHT);
 
-	Figures::displayFigure((Figure)(gmtm->tm_sec / 10), SEC_1_POS, NUMBER_HEIGHT);
-	Figures::displayFigure((Figure)(gmtm->tm_sec % 10), SEC_2_POS, NUMBER_HEIGHT);
-
-	/*
-	Serial.print(gmtm->tm_hour);
-	Serial.print(" ");
-	Serial.print(gmtm->tm_min);
-	Serial.print(" ");
-	Serial.println(gmtm->tm_sec);
-	*/
+	Figures::displayNumber((BigNumber)(gmtm->tm_sec / 10), SEC_1_POS, NUMBER_LEVEL);
+	Figures::displayNumber((BigNumber)(gmtm->tm_sec % 10), SEC_2_POS, NUMBER_LEVEL);
 }

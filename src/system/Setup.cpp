@@ -32,6 +32,7 @@ void initWallStatus (void)
 	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
 	Interface::brightness = 255;
 	ColorGradient::changeColorGradient(Interface::cmode);
+	Figures::defineNumbers();
 	Figures::defineAlphabet();
 	Moving::resetDots();
 }
