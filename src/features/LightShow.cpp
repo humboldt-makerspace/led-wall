@@ -81,6 +81,12 @@ bool insideProcessor (int x, int y)
 
 bool onProcessorEdge (int x, int y)
 {
+	if ((x == WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 && y == WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2 - 1) ||
+		(x == WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 && y == WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2) ||
+		(x == WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 && y == WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2 - 1) ||
+		(x == WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 && y == WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2)) {
+			return false;
+	}
 	return (x >= WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 &&
 			x <= WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 &&
 			y >= WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2 - 1 &&
