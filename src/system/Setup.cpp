@@ -1,8 +1,6 @@
 #include "system/Setup.hpp"
 #include "system/Interface.hpp"
 
-WiFiUDP Setup::UDPServer;
-
 void initStatusLed (void)
 {
 	pinMode(STATUS_LED_PIN, OUTPUT);
@@ -45,7 +43,6 @@ void Setup::initWifi (void)
 	WiFi.mode(WIFI_STA);
 	WiFi.begin(SSID_CUSTOM, PW_CUSTOM);
 	Serial.println();
-	Serial.println();
 	Serial.print("Wait for WiFi... ");
 
 	while (WiFi.status() != WL_CONNECTED)
@@ -57,9 +54,8 @@ void Setup::initWifi (void)
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
-	Setup::UDPServer.begin(UDP_PORT);
+	UDPManager::UDPServer.begin(UDP_PORT);
 
-	
 	configTime(TIME_ZONE * 3600, DST * 0, NTP_SERVER);
   	Serial.println("\nWaiting for time");
   	while (!time(nullptr)) {

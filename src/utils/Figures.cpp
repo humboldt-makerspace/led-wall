@@ -4,6 +4,68 @@
 boolean Figures::alphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];
 boolean Figures::numbers[NUM_BIG_NUM][BIG_NUM_WIDTH][BIG_NUM_HEIGHT];
 
+Figure Figures::charToFigure (char c)
+{
+	switch (c) {
+		case 'a':
+		case 'A': return A;
+		case 'b':
+		case 'B': return B;
+		case 'c':
+		case 'C': return C;
+		case 'd':
+		case 'D': return D;
+		case 'e':
+		case 'E': return E;
+		case 'f':
+		case 'F': return F;
+		case 'g':
+		case 'G': return G;
+		case 'h':
+		case 'H': return H;
+		case 'i':
+		case 'I': return I;
+		case 'j':
+		case 'J': return J;
+		case 'k':
+		case 'K': return K;
+		case 'l':
+		case 'L': return L;
+		case 'm':
+		case 'M': return M;
+		case 'n':
+		case 'N': return N;
+		case 'o':
+		case 'O': return O;
+		case 'p':
+		case 'P': return P;
+		case 'q':
+		case 'Q': return Q;
+		case 'r':
+		case 'R': return R;
+		case 's':
+		case 'S': return S;
+		case 't':
+		case 'T': return T;
+		case 'u':
+		case 'U': return U;
+		case 'v':
+		case 'V': return V;
+		case 'w':
+		case 'W': return W;
+		case 'x':
+		case 'X': return X;
+		case 'y':
+		case 'Y': return Y;
+		case 'z':
+		case 'Z': return Z;
+		case '!': return EXC;
+		case '?': return QUEST;
+		case ' ': return SPACE;
+		default: return N0;
+	}
+}
+
 void Figures::defineAlphabet (void)
 {
 	for (int i = 0; i < NUM_FIGURES; i++) {
@@ -582,8 +644,20 @@ void Figures::displayFigure (Figure figure, int x, int y)
 		y > WALL_HEIGHT - FIGURE_HEIGHT) return;
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
-			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_CLOCK);
-			else Interface::fadeToColor(x + i, y + j, ColorGradient::colors[x + i][y + j], FADE_FACTOR_CLOCK);
+			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_FIGURE);
+			else Interface::fadeToColor(x + i, y + j, ColorGradient::colors[x + i][y + j], FADE_FACTOR_FIGURE);
+		}
+	}
+}
+
+void Figures::displayFigureMono (Figure figure, int x, int y, CRGB color)
+{
+	if (x > WALL_WIDTH - FIGURE_WIDTH ||
+		y > WALL_HEIGHT - FIGURE_HEIGHT) return;
+	for (int i = 0; i < FIGURE_WIDTH; i++) {
+		for (int j = 0; j < FIGURE_HEIGHT; j++) {
+			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_FIGURE);
+			else Interface::fadeToColor(x + i, y + j, color, FADE_FACTOR_FIGURE);
 		}
 	}
 }

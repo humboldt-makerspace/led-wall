@@ -4,6 +4,7 @@ void setup ()
 {
 	Setup::init();
 	AudioVisualizer::flushBuffer();
+	MessageBoard::initColorSet();
 }
 
 void loop ()
@@ -33,6 +34,10 @@ void loop ()
 		}
 		case CLOCK: {
 			Clock::showTime();
+			break;
+		}
+		case MESSAGE_BOARD: {
+			MessageBoard::showMessage();
 			break;
 		}
 		case AUDIO_VISUALIZER: {

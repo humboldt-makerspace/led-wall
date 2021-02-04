@@ -14,6 +14,7 @@ int Interface::b = 0;
 
 void Interface::ledOn (int x, int y, CRGB color)
 {
+	if (Maths::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	Interface::leds[block][pos] = color;
@@ -21,6 +22,7 @@ void Interface::ledOn (int x, int y, CRGB color)
 
 void Interface::ledOff (int x, int y)
 {
+	if (Maths::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	Interface::leds[block][pos] = CRGB::Black;
@@ -28,6 +30,7 @@ void Interface::ledOff (int x, int y)
 
 void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
 {
+	if (Maths::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	nblend(Interface::leds[block][pos], color, fadefactor);
@@ -42,11 +45,11 @@ void Interface::allLedsOff (void)
 	}
 }
 
-void Interface::fadeOutAll (void)
+void Interface::fadeOutAll (uint8_t fadefactor)
 {
 	for (int i = 0; i < NUM_DATA_PINS; i++) {
 		for (int j = 0; j < NUM_LEDS; j++) {
-			Interface::fadeToColor(i, j, CRGB::Black, FADE_FACTOR_OFF);
+			Interface::fadeToColor(i, j, CRGB::Black, fadefactor);
 		}
 	}
 }

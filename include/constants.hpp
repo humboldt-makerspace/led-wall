@@ -44,12 +44,15 @@
 #define BRIGHTNESS_DEC			20
 
 /* parameters for figures */
-#define NUM_FIGURES				38
+#define NUM_FIGURES				39
 #define NUM_BIG_NUM				10
 #define BIG_NUM_WIDTH			7
 #define BIG_NUM_HEIGHT			16
 #define FIGURE_WIDTH			5
 #define FIGURE_HEIGHT			7
+#define MSG_COL_NUM				8
+#define FIRST_ROW_LEVEL			10
+#define DISPLAY_TIME			4000
 
 /* parameters for clock */
 #define HR_1_POS				0
@@ -70,6 +73,7 @@
 #define FADE_FACTOR_CLOCK		60
 #define FADE_FACTOR_BARS		150
 #define FADE_FACTOR_DOTS		100
+#define FADE_FACTOR_FIGURE		50
 
 /* moving dots */
 #define MAX_NUM_DOTS_MATRIX		30
@@ -81,6 +85,9 @@
 #define LAST_FIELDS_NUM			12
 #define PROCESSOR_SIZE			8
 
+/* WiFi and UDP */
+#define MAX_PACKET_SIZE			50
+
 /* lists all features of led wall */
 typedef enum modeTypes {
 	LIGHT_SHOW_PRIDE,
@@ -90,6 +97,7 @@ typedef enum modeTypes {
 	LIGHT_SHOW_CIRCLE,
 	LIGHT_SHOW_NETWORK,
 	CLOCK,
+	MESSAGE_BOARD,
 	TEST,
 	AUDIO_VISUALIZER
 } WallMode;
@@ -111,7 +119,7 @@ typedef enum colors {
 /* all figures that be displayed on led wall */
 typedef enum figures {
 	N0, N1, N2, N3, N4, N5, N6, N7, N8, N9,
-	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST
+	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST, SPACE
 } Figure;
 
 typedef enum bigNumbers {

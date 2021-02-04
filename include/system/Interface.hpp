@@ -18,6 +18,8 @@
 #include "utils/Moving.hpp"
 #include "utils/Geom.h"
 
+#include "io/UDPManager.hpp"
+
 class Interface {
 private:
 	/* variables */
@@ -46,7 +48,7 @@ public:
 	static void fadeToColor (int x, int y, CRGB color, uint8_t fadefactor);
 	static void fadeToBlack (int x, int y, uint8_t fadefactor);
 	static void allLedsOff (void);
-	static void fadeOutAll (void);
+	static void fadeOutAll (uint8_t fadefactor);
 	static void statusLedOn (void);
 	static void statusLedOff (void);
 	static CRGB getColor (void);

@@ -7,5 +7,6 @@
 #include "features/AudioVisualizer.hpp"
 #include "features/Clock.hpp"
 #include "features/LightShow.hpp"
+#include "features/MessageBoard.hpp"
 
 #endif
