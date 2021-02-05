@@ -2,6 +2,7 @@
 #define MESSAGE_BOARD_HPP
 
 #include "system/Interface.hpp"
+#include "CustomTypes.h"
 
 class MessageBoard {
 private:
@@ -21,6 +22,7 @@ public:
 	static void showMessage (String msg);
 	static void clearBoard (void);
 	static void letterShiftTest (void);
+	static Format defineFormat (String msg);
 };
 
 #endif

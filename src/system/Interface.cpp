@@ -7,7 +7,6 @@ boolean Interface::btnPressed[NUM_BUTTONS];
 WallMode Interface::mode;
 ColorMode Interface::cmode;
 
-/* NOTE: the order is GRB */
 int Interface::r = 0;
 int Interface::g = 255;
 int Interface::b = 0;
@@ -104,10 +103,11 @@ void initColors (void)
 	}
 }
 
-void setModeValues (WallMode mode)
+void initModes (WallMode mode)
 {
 	switch (mode) {
 		case LIGHT_SHOW_LOOP: {
+			MessageBoard::showMessage("LOOP");
 			initColors();
 			Moving::resetDots();
 			for (int i = 0; i < MAX_NUM_DOTS_CIRCLE; i++) {
@@ -119,21 +119,44 @@ void setModeValues (WallMode mode)
 			break;
 		}
 		case LIGHT_SHOW_MATRIX_VIBE: {
+			MessageBoard::showMessage("MATRIX");
 			initColors();
 			Moving::resetDots();
 			Moving::maxNumDots = MAX_NUM_DOTS_MATRIX;
 			break;
 		}
 		case LIGHT_SHOW_PROCESSOR: {
+			MessageBoard::showMessage("PROCESSOR");
 			initColors();
 			Moving::resetDots();
 			Moving::maxNumDots = MAX_NUM_DOTS_PROCESSOR;
 			break;
 		}
 		case LIGHT_SHOW_NETWORK: {
+			MessageBoard::showMessage("NETWORK");
 			initColors();
 			Moving::resetDots();
 			Moving::maxNumDots = MAX_NUM_DOTS_NETWORK;
+			break;
+		}
+		case LIGHT_SHOW_PRIDE: {
+			MessageBoard::showMessage("PRIDE");
+			break;
+		}
+		case LIGHT_SHOW_STATIC_COLOR: {
+			MessageBoard::showMessage("STATIC");
+			break;
+		}
+		case CLOCK: {
+			MessageBoard::showMessage("CLOCK");
+			break;
+		}
+		case AUDIO_VISUALIZER: {
+			MessageBoard::showMessage("AUDIO");
+			break;
+		}
+		case TEST: {
+			MessageBoard::showMessage("TEST");
 			break;
 		}
 		default: {
@@ -150,13 +173,15 @@ void Interface::changeMode (void)
 		tmp++;
 		mode = (WallMode) tmp;
 	}
-	setModeValues(mode);
+	initModes(mode);
 	Interface::allLedsOff();
 }
 
 void Interface::setMode (WallMode mode)
 {
 	Interface::mode = mode;
+	initModes(mode);
+	Interface::allLedsOff();
 }
 
 void Interface::switchColors (void)

@@ -5,7 +5,7 @@ CRGB ColorGradient::colorsHorizontal[WALL_WIDTH];
 CRGB ColorGradient::colorsVertical[WALL_HEIGHT];
 CRGB ColorGradient::colors[WALL_WIDTH][WALL_HEIGHT];
 
-void fillGradientRGB(CRGB* input, uint16_t startpos, CRGB startcolor, uint16_t endpos, CRGB endcolor)
+void fillGradientRGB (CRGB* input, uint16_t startpos, CRGB startcolor, uint16_t endpos, CRGB endcolor)
 {
     if (endpos < startpos) {
         uint16_t t = endpos;
@@ -53,31 +53,35 @@ void ColorGradient::fillCompleteWall (ColorMode mode)
 		case RAINBOW_SYMMETRICAL:
 		case SUPERMAN_HORIZONTAL:
 		case AVH_HORIZONTAL:
-		case TEMPERATURE_HORIZONTAL:
+		case TEMPERATURE_HORIZONTAL: {
 			for (int i = 0; i < WALL_WIDTH; i++) {
 				for (int j = 0; j < WALL_HEIGHT; j++) {
 					colors[i][j] = colorsHorizontal[i];
 				}
 			}
 			break;
+		}
 		case RAINBOW_VERTICAL:
 		case SUPERMAN_VERTICAL:
 		case AVH_VERTICAL:
-		case TEMPERATURE_VERTICAL:
+		case TEMPERATURE_VERTICAL: {
 			for (int i = 0; i < WALL_WIDTH; i++) {
 				for (int j = 0; j < WALL_HEIGHT; j++) {
 					colors[i][j] = colorsVertical[j];
 				}
 			}
 			break;
-		case MONO:
+		}
+		case MONO: {
 			for (int i = 0; i < WALL_WIDTH; i++) {
 				for (int j = 0; j < WALL_HEIGHT; j++) {
 					colors[i][j] = Interface::getColor();
 				}
 			}
-		default:
+		}
+		default: {
 			break;
+		}
 	}
 }
 
@@ -88,46 +92,56 @@ void ColorGradient::changeColorGradient (ColorMode mode)
 	CRGB avhOrange = CRGB(182, 244, 112);
 
 	switch (mode) {
-		case RAINBOW_HORIZONTAL:
-			fillGradientRGB(colorsHorizontal, 0, CRGB::Green, (WALL_WIDTH - 1) / 3, CRGB::Red);
-			fillGradientRGB(colorsHorizontal, (WALL_WIDTH - 1) / 3, CRGB::Red, 2 * (WALL_WIDTH - 1) / 3, CRGB::Blue);
-			fillGradientRGB(colorsHorizontal, 2 * (WALL_WIDTH - 1) / 3, CRGB::Blue, WALL_WIDTH - 1, CRGB::Green);
+		case RAINBOW_HORIZONTAL: {
+			fillGradientRGB(colorsHorizontal, 0, CRGB::Red, (WALL_WIDTH - 1) / 3, CRGB::Green);
+			fillGradientRGB(colorsHorizontal, (WALL_WIDTH - 1) / 3, CRGB::Green, 2 * (WALL_WIDTH - 1) / 3, CRGB::Blue);
+			fillGradientRGB(colorsHorizontal, 2 * (WALL_WIDTH - 1) / 3, CRGB::Blue, WALL_WIDTH - 1, CRGB::Red);
 			break;
-		case RAINBOW_VERTICAL:
-			fillGradientRGB(colorsVertical, 0, CRGB::Green, (WALL_HEIGHT - 1) / 3, CRGB::Red);
-			fillGradientRGB(colorsVertical, (WALL_HEIGHT - 1) / 3, CRGB::Red, 2 * (WALL_HEIGHT - 1) / 3, CRGB::Blue);
-			fillGradientRGB(colorsVertical, 2 * (WALL_HEIGHT - 1) / 3, CRGB::Blue, WALL_HEIGHT - 1, CRGB::Green);
+		}
+		case RAINBOW_VERTICAL: {
+			fillGradientRGB(colorsVertical, 0, CRGB::Red, (WALL_HEIGHT - 1) / 3, CRGB::Green);
+			fillGradientRGB(colorsVertical, (WALL_HEIGHT - 1) / 3, CRGB::Green, 2 * (WALL_HEIGHT - 1) / 3, CRGB::Blue);
+			fillGradientRGB(colorsVertical, 2 * (WALL_HEIGHT - 1) / 3, CRGB::Blue, WALL_HEIGHT - 1, CRGB::Red);
 			break;
-		case RAINBOW_SYMMETRICAL:
-			fillGradientRGB(colorsHorizontal, 0, CRGB::Green, (WALL_WIDTH - 1) / 6, CRGB::Blue);
-			fillGradientRGB(colorsHorizontal, (WALL_WIDTH - 1) / 6, CRGB::Blue, 2 * (WALL_WIDTH - 1) / 6, CRGB::Red);
-			fillGradientRGB(colorsHorizontal, 2 * (WALL_WIDTH - 1) / 6, CRGB::Red, 3 * (WALL_WIDTH - 1) / 6, CRGB::Green);
-			fillGradientRGB(colorsHorizontal, 3 * (WALL_WIDTH - 1) / 6 + 1, CRGB::Green, 4 * (WALL_WIDTH - 1) / 6, CRGB::Red);
-			fillGradientRGB(colorsHorizontal, 4 * (WALL_WIDTH - 1) / 6, CRGB::Red, 5 * (WALL_WIDTH - 1) / 6, CRGB::Blue);
-			fillGradientRGB(colorsHorizontal, 5 * (WALL_WIDTH - 1) / 6, CRGB::Blue, WALL_WIDTH - 1, CRGB::Green);
+		}
+		case RAINBOW_SYMMETRICAL: {
+			fillGradientRGB(colorsHorizontal, 0, CRGB::Red, (WALL_WIDTH - 1) / 6, CRGB::Blue);
+			fillGradientRGB(colorsHorizontal, (WALL_WIDTH - 1) / 6, CRGB::Blue, 2 * (WALL_WIDTH - 1) / 6, CRGB::Green);
+			fillGradientRGB(colorsHorizontal, 2 * (WALL_WIDTH - 1) / 6, CRGB::Green, 3 * (WALL_WIDTH - 1) / 6, CRGB::Red);
+			fillGradientRGB(colorsHorizontal, 3 * (WALL_WIDTH - 1) / 6 + 1, CRGB::Red, 4 * (WALL_WIDTH - 1) / 6, CRGB::Green);
+			fillGradientRGB(colorsHorizontal, 4 * (WALL_WIDTH - 1) / 6, CRGB::Green, 5 * (WALL_WIDTH - 1) / 6, CRGB::Blue);
+			fillGradientRGB(colorsHorizontal, 5 * (WALL_WIDTH - 1) / 6, CRGB::Blue, WALL_WIDTH - 1, CRGB::Red);
 			break;
-		case SUPERMAN_HORIZONTAL:
-			fillGradientRGB(colorsHorizontal, 0, CRGB::Green, WALL_WIDTH - 1, CRGB::Blue);
+		}
+		case SUPERMAN_HORIZONTAL: {
+			fillGradientRGB(colorsHorizontal, 0, CRGB::Red, WALL_WIDTH - 1, CRGB::Blue);
 			break;
-		case SUPERMAN_VERTICAL:
-			fillGradientRGB(colorsVertical, 0, CRGB::Green, WALL_HEIGHT - 1, CRGB::Blue);
+		}
+		case SUPERMAN_VERTICAL: {
+			fillGradientRGB(colorsVertical, 0, CRGB::Red, WALL_HEIGHT - 1, CRGB::Blue);
 			break;
-		case AVH_HORIZONTAL:
+		}
+		case AVH_HORIZONTAL: {
 			fillGradientRGB(colorsHorizontal, 0, avhGreen, WALL_WIDTH / 2, avhBlue);
 			fillGradientRGB(colorsHorizontal, WALL_WIDTH / 2, avhBlue, WALL_WIDTH - 1, avhOrange);
 			break;
-		case AVH_VERTICAL:
+		}
+		case AVH_VERTICAL: {
 			fillGradientRGB(colorsVertical, 0, CRGB(211, 178, 139), WALL_HEIGHT / 2, CRGB(203, 128, 219));
 			fillGradientRGB(colorsVertical, WALL_HEIGHT / 2, CRGB(203, 128, 219), WALL_HEIGHT - 1, CRGB(182, 244, 112));
 			break;
-		case TEMPERATURE_HORIZONTAL:
-			fillGradientRGB(colorsHorizontal, 0, CRGB::Green, WALL_WIDTH - 1, CRGB::Red);
+		}
+		case TEMPERATURE_HORIZONTAL: {
+			fillGradientRGB(colorsHorizontal, 0, CRGB::Red, WALL_WIDTH - 1, CRGB::Green);
 			break;
-		case TEMPERATURE_VERTICAL:
+		}
+		case TEMPERATURE_VERTICAL: {
 			fillGradientRGB(colorsVertical, 0, CRGB::Green, WALL_HEIGHT - 1, CRGB::Red);
 			break;
-		default:
+		}
+		default: {
 			break;
+		}
 	}
 	fillCompleteWall(mode);
 }

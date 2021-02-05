@@ -1,4 +1,3 @@
-#include "utils/Moving.hpp"
 #include "features/LightShow.hpp"
 #include "system/Interface.hpp"
 
@@ -66,11 +65,6 @@ void LightShow::matrixVibe (void)
 	delay(40);
 }
 
-void LightShow::EKGPulse (void)
-{
-	
-}
-
 bool insideProcessor (int x, int y)
 {
 	return (x >= WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 &&
@@ -85,7 +79,7 @@ bool onProcessorEdge (int x, int y)
 		(x == WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 && y == WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2) ||
 		(x == WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 && y == WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2 - 1) ||
 		(x == WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 && y == WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2)) {
-			return false;
+		return false;
 	}
 	return (x >= WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 &&
 			x <= WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 &&

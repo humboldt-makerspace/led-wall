@@ -1,7 +1,7 @@
 #ifndef AUDIO_VISUALIZER_HPP
 #define AUDIO_VISUALIZER_HPP
 
-#include "constants.hpp"
+#include "constants.h"
 
 class AudioVisualizer {
 private:

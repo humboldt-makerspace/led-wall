@@ -19,9 +19,9 @@ void initButtons (void)
 
 void initLeds (void)
 {
-	FastLED.addLeds<WS2812B, LED_PIN_1>(Interface::leds[0], NUM_LEDS);
-	FastLED.addLeds<WS2812B, LED_PIN_2>(Interface::leds[1], NUM_LEDS);
-	FastLED.addLeds<WS2812B, LED_PIN_3>(Interface::leds[2], NUM_LEDS);
+	FastLED.addLeds<WS2812B, LED_PIN_1, GRB>(Interface::leds[0], NUM_LEDS);
+	FastLED.addLeds<WS2812B, LED_PIN_2, GRB>(Interface::leds[1], NUM_LEDS);
+	FastLED.addLeds<WS2812B, LED_PIN_3, GRB>(Interface::leds[2], NUM_LEDS);
 }
 
 void initWallStatus (void)

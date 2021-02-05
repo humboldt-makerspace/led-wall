@@ -6,7 +6,7 @@
 class AudioAnalyzer {
 private:
 	/* variables */
-	static unsigned int sampling_period_us;
+	static unsigned int samplingPeriodUs;
 	static unsigned long microseconds;
 	static unsigned long newTime, oldTime;
 	static byte peak[];

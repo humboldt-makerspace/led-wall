@@ -61,7 +61,16 @@ Figure Figures::charToFigure (char c)
 		case 'Z': return Z;
 		case '!': return EXC;
 		case '?': return QUEST;
-		case ' ': return SPACE;
+		case '0': return N0;
+		case '1': return N1;
+		case '2': return N2;
+		case '3': return N3;
+		case '4': return N4;
+		case '5': return N5;
+		case '6': return N6;
+		case '7': return N7;
+		case '8': return N8;
+		case '9': return N9;
 		default: return N0;
 	}
 }
@@ -643,7 +652,7 @@ void Figures::displayFigure (Figure figure, int x, int y)
 	}
 }
 
-void Figures::displayFigureMono (Figure figure, int x, int y, CRGB color)
+void Figures::displayFigure (Figure figure, int x, int y, CRGB color)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {

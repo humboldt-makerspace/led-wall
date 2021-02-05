@@ -1,7 +1,7 @@
-#ifndef GEOM_H
-#define GEOM_H
+#ifndef CUSTOM_TYPES_H
+#define CUSTOM_TYPES_H
 
-#include "system/Interface.hpp"
+#include "constants.h"
 
 typedef struct point {
 	int x;
@@ -15,5 +15,12 @@ typedef struct dot {
 	int bufferIndex;
 	Direction dir;
 } Dot;
+
+typedef struct msgFormat {
+	int endInd1;
+	int endInd2;
+	int pos1;
+	int pos2; 
+} Format;
 
 #endif

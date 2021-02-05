@@ -1,7 +1,7 @@
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
 
-#include "constants.hpp"
+#include "constants.h"
 #include "Arduino.h"
 #include "arduinoFFT.h"
 #include "FastLED.h"
@@ -16,7 +16,8 @@
 #include "utils/AudioAnalyzer.hpp"
 #include "utils/Misc.hpp"
 #include "utils/Moving.hpp"
-#include "utils/Geom.h"
+#include "utils/CustomTypes.h"
+#include "utils/MessageBoard.hpp"
 
 #include "io/UDPManager.hpp"
 #include "io/Parser.hpp"
@@ -47,7 +48,6 @@ public:
 	static void ledOn (int x, int y, CRGB color);
 	static void ledOff (int x, int y);
 	static void fadeToColor (int x, int y, CRGB color, uint8_t fadefactor);
-	static void fadeToBlack (int x, int y, uint8_t fadefactor);
 	static void allLedsOff (void);
 	static void fadeOutAll (uint8_t fadefactor);
 	static void statusLedOn (void);

@@ -21,6 +21,7 @@ String UDPManager::readPackage (void)
 void UDPManager::processCommand (String cmd)
 {
 	if (cmd.isEmpty()) return;
+	cmd.toLowerCase();
 	if (cmd.startsWith(CMD_MODE)) {
 		WallMode m = Parser::parseWallMode(cmd);
 		if (m != -1) Interface::setMode(m);

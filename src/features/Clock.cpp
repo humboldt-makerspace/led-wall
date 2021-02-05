@@ -6,10 +6,7 @@ tm* Clock::gmtm;
 void Clock::getTime (void)
 {
 	time_t now = time(0);
-  	//time(&now);
-  	gmtm = localtime(&now); 
-	
-	//gmtm = gmtime(&now);
+  	gmtm = localtime(&now);
 }
 
 void Clock::showTime (void)

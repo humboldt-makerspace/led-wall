@@ -1,5 +1,5 @@
-#ifndef CONSTANTS_HPP
-#define CONSTANTS_HPP
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 /* data pins for led stripes */
 #define LED_PIN_1               25
@@ -44,7 +44,7 @@
 #define BRIGHTNESS_DEC			20
 
 /* parameters for figures */
-#define NUM_FIGURES				39
+#define NUM_FIGURES				38
 #define NUM_BIG_NUM				10
 #define BIG_NUM_WIDTH			7
 #define BIG_NUM_HEIGHT			16
@@ -52,6 +52,7 @@
 #define FIGURE_HEIGHT			7
 #define MSG_COL_NUM				8
 #define FIRST_ROW_LEVEL			10
+#define MIDDLE_ROW_LEVEL		6
 #define DISPLAY_TIME			4000
 #define BOARD_FADEOUT_TIME		1000
 
@@ -70,7 +71,7 @@
 #define DST						1
 
 /* fade factors, higher value means faster fading */
-#define FADE_FACTOR_OFF			100
+#define FADE_FACTOR_OFF			50
 #define FADE_FACTOR_CLOCK		60
 #define FADE_FACTOR_BARS		150
 #define FADE_FACTOR_DOTS		100
@@ -90,9 +91,9 @@
 #define MAX_PACKET_SIZE			66
 
 /* command prefixes */
-#define CMD_MODE				"/set mode"
-#define CMD_BRIGHTNESS			"/set brightness"
-#define CMD_COLOR				"/set color"
+#define CMD_MODE				"/mode"
+#define CMD_BRIGHTNESS			"/brightness"
+#define CMD_COLOR				"/color"
 
 /* command suffixes */
 #define MODE_PRIDE				"pride"
@@ -145,7 +146,7 @@ typedef enum colors {
 /* all figures that be displayed on led wall */
 typedef enum figures {
 	N0, N1, N2, N3, N4, N5, N6, N7, N8, N9,
-	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST, SPACE
+	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST
 } Figure;
 
 typedef enum bigNumbers {

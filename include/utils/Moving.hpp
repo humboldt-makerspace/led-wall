@@ -1,8 +1,9 @@
 #ifndef MOVING_HPP
 #define MOVING_HPP
 
-#include "constants.hpp"
-#include "Geom.h"
+#include "CustomTypes.h"
+#include "constants.h"
+#include "FastLED.h"
 
 class Moving {
 private:

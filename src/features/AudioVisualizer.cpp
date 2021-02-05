@@ -7,9 +7,7 @@ double AudioVisualizer::spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
 void AudioVisualizer::flushBuffer (void)
 {
 	for (int i = 0; i < WALL_WIDTH; i++) {
-		for (int j = 0; j < BUFFER_SIZE; j++) {
-			spectrumBuffer[i][j] = 0;
-		}
+		for (int j = 0; j < BUFFER_SIZE; j++) spectrumBuffer[i][j] = 0;
 		bufferCounter[i] = 0;
 	}
 }
@@ -32,9 +30,7 @@ void AudioVisualizer::flattenBuffer (int pos)
 double AudioVisualizer::getAvgValue (int pos)
 {
 	double res = 0;
-	for (int i = 0; i < BUFFER_SIZE; i++) {
-		res += spectrumBuffer[pos][i];
-	}
+	for (int i = 0; i < BUFFER_SIZE; i++) res += spectrumBuffer[pos][i];
 	return res / BUFFER_SIZE;
 }
 
@@ -48,9 +44,7 @@ void AudioVisualizer::visualizeAudio (void)
 	for (int i = 0; i < WALL_WIDTH - 1; i++) {
 		int begin = (int)(SAMPLING_RANGE - 1 - Misc::logBaseX(LOG_BASE, WALL_WIDTH - i));
 		int end = (int)(SAMPLING_RANGE - 1 - Misc::logBaseX(LOG_BASE, WALL_WIDTH - i - 1));
-		for (int j = begin; j < end; j++) {
-			spectrum[i] += AudioAnalyzer::vReal[j];
-		}
+		for (int j = begin; j < end; j++) spectrum[i] += AudioAnalyzer::vReal[j];
 
 		if (end != begin) spectrum[i] = spectrum[i] / (end - begin);
 		spectrum[i] = spectrum[i] / pow(LOW_FREQ_DAMPER, WALL_WIDTH - i);
