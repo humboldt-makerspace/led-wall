@@ -44,36 +44,20 @@ void AudioVisualizer::visualizeAudio (void)
 
 	double spectrum[WALL_WIDTH];
 	for (int i = 0; i < WALL_WIDTH; i++) spectrum[i] = 0.0;
-	//double maximum = 0.0;
 
 	for (int i = 0; i < WALL_WIDTH - 1; i++) {
-		int begin = (int)(SAMPLING_RANGE - 1 - Maths::logBaseX(LOG_BASE, WALL_WIDTH - i));
-		int end = (int)(SAMPLING_RANGE - 1 - Maths::logBaseX(LOG_BASE, WALL_WIDTH - i - 1));
+		int begin = (int)(SAMPLING_RANGE - 1 - Misc::logBaseX(LOG_BASE, WALL_WIDTH - i));
+		int end = (int)(SAMPLING_RANGE - 1 - Misc::logBaseX(LOG_BASE, WALL_WIDTH - i - 1));
 		for (int j = begin; j < end; j++) {
 			spectrum[i] += AudioAnalyzer::vReal[j];
 		}
-		/*
-		if (i == 0) {
-			Serial.print(begin);
-			Serial.print(" ");
-			Serial.println(end);
-			Serial.print(" ");
-			Serial.println(AudioAnalyzer::vReal[end]);
-		}
-		*/
-		//if (end != begin) spectrum[(WALL_WIDTH - 1) / 2 - i] = spectrum[(WALL_WIDTH - 1) / 2 - i] / (end - begin);
+
 		if (end != begin) spectrum[i] = spectrum[i] / (end - begin);
 		spectrum[i] = spectrum[i] / pow(LOW_FREQ_DAMPER, WALL_WIDTH - i);
-		//spectrum[(WALL_WIDTH - 1) / 2 - i] = spectrum[(WALL_WIDTH - 1) / 2 - i] / pow(LOW_FREQ_DAMPER, (WALL_WIDTH - 1) / 2 - i);
-		//if (spectrum[i] > maximum) maximum = spectrum[i];
 	}
 	spectrum[0] = spectrum[0] / 3.0;
 	spectrum[1] = spectrum[1] / 1.5;
 	spectrum[2] = spectrum[2] / 1.2;
-
-	//for (int i = 0; i < WALL_WIDTH / 2; i++) spectrum[WALL_WIDTH - 1 - i] = spectrum[i];
-
-	//Serial.println(maximum);
 
 	for (int i = 0; i < WALL_WIDTH - 1; i++) {
 		if (spectrum[i] > getAvgValue(i)) updateBuffer(spectrum[i], i);

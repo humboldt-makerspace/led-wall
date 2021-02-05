@@ -43,7 +43,7 @@ void Moving::removeDot (Dot* dot)
 void Moving::autoResetDot (Dot* dot)
 {
 	if (dot->outCounter == -1) return;
-	if (Maths::outOfBounds(dot->p.x, dot->p.y)) {
+	if (Misc::outOfBounds(dot->p.x, dot->p.y)) {
 		if (dot->outCounter >= LAST_FIELDS_NUM) {
 			dot->p.x = -1;
 			dot->p.y = -1;
@@ -74,7 +74,7 @@ void Moving::showDot (Dot* dot)
 		weakC.b = ColorGradient::colors[dot->last[j].x][dot->last[j].y].b * WEAKEN_FACTOR;
 		Interface::fadeToColor(dot->last[j].x, dot->last[j].y, weakC, FADE_FACTOR_DOTS);
 	}
-	if (!Maths::outOfBounds(dot->p.x, dot->p.y)) {
+	if (!Misc::outOfBounds(dot->p.x, dot->p.y)) {
 		Interface::ledOn(dot->p.x, dot->p.y, ColorGradient::colors[dot->p.x][dot->p.y]);
 	}
 }
@@ -89,14 +89,14 @@ void Moving::showDot (Dot* dot, CRGB color)
 		weakC.b = ColorGradient::colors[dot->last[j].x][dot->last[j].y].b * WEAKEN_FACTOR;
 		Interface::fadeToColor(dot->last[j].x, dot->last[j].y, weakC, FADE_FACTOR_DOTS);
 	}
-	if (!Maths::outOfBounds(dot->p.x, dot->p.y)) {
+	if (!Misc::outOfBounds(dot->p.x, dot->p.y)) {
 		Interface::ledOn(dot->p.x, dot->p.y, color);
 	}
 }
 
 void Moving::moveDot (Dot* dot)
 {
-	if (Maths::outOfBounds(dot->p.x, dot->p.y)) return;
+	if (Misc::outOfBounds(dot->p.x, dot->p.y)) return;
 
 	Moving::updateBuffer(dot);
 
