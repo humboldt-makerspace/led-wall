@@ -14,7 +14,7 @@ int Interface::b = 0;
 
 void Interface::ledOn (int x, int y, CRGB color)
 {
-	if (Maths::outOfBounds(x, y)) return;
+	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	Interface::leds[block][pos] = color;
@@ -22,7 +22,7 @@ void Interface::ledOn (int x, int y, CRGB color)
 
 void Interface::ledOff (int x, int y)
 {
-	if (Maths::outOfBounds(x, y)) return;
+	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	Interface::leds[block][pos] = CRGB::Black;
@@ -30,7 +30,7 @@ void Interface::ledOff (int x, int y)
 
 void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
 {
-	if (Maths::outOfBounds(x, y)) return;
+	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
 	nblend(Interface::leds[block][pos], color, fadefactor);
@@ -66,7 +66,14 @@ void Interface::statusLedOff (void)
 
 CRGB Interface::getColor (void)
 {
-	return CRGB(g, r, b);
+	return CRGB(r, g, b);
+}
+
+void Interface::setColor (CRGB color)
+{
+	Interface::r = color.r;
+	Interface::g = color.g;
+	Interface::b = color.b;
 }
 
 void Interface::changeBrightness (void)
@@ -75,6 +82,12 @@ void Interface::changeBrightness (void)
 	else brightness -= BRIGHTNESS_DEC;
 
 	if (brightness < 0) brightness = 0;
+	FastLED.setBrightness(brightness);
+}
+
+void Interface::setBrightness (uint8_t brightness)
+{
+	Interface::brightness = brightness;
 	FastLED.setBrightness(brightness);
 }
 
@@ -94,7 +107,7 @@ void initColors (void)
 void setModeValues (WallMode mode)
 {
 	switch (mode) {
-		case LIGHT_SHOW_CIRCLE: {
+		case LIGHT_SHOW_LOOP: {
 			initColors();
 			Moving::resetDots();
 			for (int i = 0; i < MAX_NUM_DOTS_CIRCLE; i++) {
@@ -141,6 +154,11 @@ void Interface::changeMode (void)
 	Interface::allLedsOff();
 }
 
+void Interface::setMode (WallMode mode)
+{
+	Interface::mode = mode;
+}
+
 void Interface::switchColors (void)
 {
 	if (cmode == ColorMode::MONO) {
@@ -166,6 +184,11 @@ void Interface::switchColors (void)
 		cmode = (ColorMode) tmp;
 	}
 	ColorGradient::changeColorGradient(cmode);
+}
+
+void Interface::setColorMode (ColorMode cmode)
+{
+	Interface::cmode = cmode;
 }
 
 void Interface::readButtons (void)

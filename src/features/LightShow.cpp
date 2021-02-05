@@ -146,7 +146,7 @@ void LightShow::processorAnimation (void)
 	}
 }
 
-void changeDirectionCircle (Dot* dot, int i)
+void changeDirectionLoop (Dot* dot, int i)
 {
 	if (dot->p.x >= WALL_WIDTH - 1 - i && dot->p.y > 0 + i) {
 		dot->dir = DOWN;
@@ -162,10 +162,10 @@ void changeDirectionCircle (Dot* dot, int i)
 	}
 }
 
-void LightShow::circling (void)
+void LightShow::looping (void)
 {
 	for (int i = 0; i < Moving::maxNumDots; i++) {
-		changeDirectionCircle(&Moving::dots[i], i);
+		changeDirectionLoop(&Moving::dots[i], i);
 		Moving::showDot(&Moving::dots[i]);
 		Moving::moveDot(&Moving::dots[i]);
 	}

@@ -14,11 +14,12 @@
 #include "utils/Bars.hpp"
 #include "utils/Figures.hpp"
 #include "utils/AudioAnalyzer.hpp"
-#include "utils/Maths.hpp"
+#include "utils/Misc.hpp"
 #include "utils/Moving.hpp"
 #include "utils/Geom.h"
 
 #include "io/UDPManager.hpp"
+#include "io/Parser.hpp"
 
 class Interface {
 private:
@@ -52,6 +53,10 @@ public:
 	static void statusLedOn (void);
 	static void statusLedOff (void);
 	static CRGB getColor (void);
+	static void setMode (WallMode mode);
+	static void setBrightness (uint8_t brightness);
+	static void setColor (CRGB color);
+	static void setColorMode (ColorMode cmode);
 };
 
 #endif

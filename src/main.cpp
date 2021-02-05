@@ -1,5 +1,7 @@
 #include "includes.hpp"
 
+String inc;
+
 void setup ()
 {
 	Setup::init();
@@ -10,6 +12,9 @@ void setup ()
 void loop ()
 {	
 	Interface::readButtons();
+	inc = UDPManager::readPackage();
+	UDPManager::processCommand(inc);
+	MessageBoard::showMessage(inc);
 
 	switch (Interface::mode) {
 		case LIGHT_SHOW_PRIDE: {
@@ -28,16 +33,12 @@ void loop ()
 			LightShow::processorAnimation();
 			break;
 		}
-		case LIGHT_SHOW_CIRCLE: {
-			LightShow::circling();
+		case LIGHT_SHOW_LOOP: {
+			LightShow::looping();
 			break;
 		}
 		case CLOCK: {
 			Clock::showTime();
-			break;
-		}
-		case MESSAGE_BOARD: {
-			MessageBoard::showMessage();
 			break;
 		}
 		case AUDIO_VISUALIZER: {
@@ -45,7 +46,8 @@ void loop ()
 			break;
 		}
 		case TEST: {
-			Interface::allLedsOff();
+			MessageBoard::letterShiftTest();
+			//Interface::allLedsOff();
 			break;
 		}
 		default: {

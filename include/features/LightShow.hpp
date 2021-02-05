@@ -16,7 +16,7 @@ public:
 	static void EKGPulse (void);
 	static void processorAnimation (void);
 	static void networkAnimation (void);
-	static void circling (void);
+	static void looping (void);
 };
 
 #endif

@@ -5,6 +5,9 @@
 
 class MessageBoard {
 private:
+	/* variables */
+	static unsigned long time;
+
 	/* functions */
 
 public:
@@ -15,8 +18,9 @@ public:
 
 	/* functions */
 	static void initColorSet (void);
-	static void showMessage (void);
+	static void showMessage (String msg);
 	static void clearBoard (void);
+	static void letterShiftTest (void);
 };
 
 #endif

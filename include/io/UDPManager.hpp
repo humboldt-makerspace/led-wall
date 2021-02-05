@@ -6,6 +6,7 @@
 
 class UDPManager {
 private:
+	/* functions */
 
 public:
 	/* variables */
@@ -14,6 +15,7 @@ public:
 
 	/* functions */
 	static String readPackage (void);
+	static void processCommand (String cmd);
 };
 
 #endif

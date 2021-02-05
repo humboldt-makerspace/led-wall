@@ -53,6 +53,7 @@
 #define MSG_COL_NUM				8
 #define FIRST_ROW_LEVEL			10
 #define DISPLAY_TIME			4000
+#define BOARD_FADEOUT_TIME		1000
 
 /* parameters for clock */
 #define HR_1_POS				0
@@ -86,7 +87,33 @@
 #define PROCESSOR_SIZE			8
 
 /* WiFi and UDP */
-#define MAX_PACKET_SIZE			50
+#define MAX_PACKET_SIZE			66
+
+/* command prefixes */
+#define CMD_MODE				"/set mode"
+#define CMD_BRIGHTNESS			"/set brightness"
+#define CMD_COLOR				"/set color"
+
+/* command suffixes */
+#define MODE_PRIDE				"pride"
+#define MODE_STATIC				"static"
+#define MODE_MATRIX				"matrix"
+#define MODE_PROCESSOR			"processor"
+#define MODE_LOOP				"loop"
+#define MODE_NETWORK			"network"
+#define MODE_CLOCK				"clock"
+#define MODE_TEST				"test"
+#define MODE_AUDIO				"audio"
+
+#define COLOR_RAINBOW_H			"rainbowh"
+#define COLOR_RAINBOW_V			"rainbowv"
+#define COLOR_RAINBOW_SYM		"rainbows"
+#define COLOR_SUPERMAN_H		"supermanh"
+#define COLOR_SUPERMAN_V		"supermanv"
+#define COLOR_AVH_H				"avhh"
+#define COLOR_AVH_V				"avhv"
+#define COLOR_TEMP_H			"temperatureh"
+#define COLOR_TEMP_V			"temperaturev"
 
 /* lists all features of led wall */
 typedef enum modeTypes {
@@ -94,10 +121,9 @@ typedef enum modeTypes {
 	LIGHT_SHOW_STATIC_COLOR,
 	LIGHT_SHOW_MATRIX_VIBE,
 	LIGHT_SHOW_PROCESSOR,
-	LIGHT_SHOW_CIRCLE,
+	LIGHT_SHOW_LOOP,
 	LIGHT_SHOW_NETWORK,
 	CLOCK,
-	MESSAGE_BOARD,
 	TEST,
 	AUDIO_VISUALIZER
 } WallMode;

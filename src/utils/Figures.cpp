@@ -619,17 +619,12 @@ void Figures::defineNumbers (void)
 
 void Figures::displayColon (int x, int y)
 {	
-	if (x > WALL_WIDTH - 2 || y > WALL_HEIGHT - 5) return;
-
 	Interface::ledOn(x, y, ColorGradient::colors[x][y]);
 	Interface::ledOn(x, y + 3, ColorGradient::colors[x][y + 3]);
-
 }
 
 void Figures::displayNumber (BigNumber number, int x, int y)
 {
-	if (x > WALL_WIDTH - BIG_NUM_WIDTH ||
-		y > WALL_HEIGHT - BIG_NUM_HEIGHT) return;
 	for (int i = 0; i < BIG_NUM_WIDTH; i++) {
 		for (int j = 0; j < BIG_NUM_HEIGHT; j++) {
 			if (!numbers[number][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_CLOCK);
@@ -640,8 +635,6 @@ void Figures::displayNumber (BigNumber number, int x, int y)
 
 void Figures::displayFigure (Figure figure, int x, int y)
 {
-	if (x > WALL_WIDTH - FIGURE_WIDTH ||
-		y > WALL_HEIGHT - FIGURE_HEIGHT) return;
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
 			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_FIGURE);
@@ -652,8 +645,6 @@ void Figures::displayFigure (Figure figure, int x, int y)
 
 void Figures::displayFigureMono (Figure figure, int x, int y, CRGB color)
 {
-	if (x > WALL_WIDTH - FIGURE_WIDTH ||
-		y > WALL_HEIGHT - FIGURE_HEIGHT) return;
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
 			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_FIGURE);
