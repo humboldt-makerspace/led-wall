@@ -28,11 +28,13 @@ void initWallStatus (void)
 {
 	Interface::mode = WallMode::LIGHT_SHOW_MATRIX_VIBE;
 	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
-	Interface::brightness = 255;
+	Interface::brightness = 50;
+	FastLED.setBrightness(50);
 	ColorGradient::changeColorGradient(Interface::cmode);
 	Figures::defineNumbers();
 	Figures::defineAlphabet();
 	Moving::resetDots();
+	Moving::maxNumDots = MAX_NUM_DOTS_MATRIX;
 }
 
 void Setup::initWifi (void)

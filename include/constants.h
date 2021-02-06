@@ -44,17 +44,19 @@
 #define BRIGHTNESS_DEC			20
 
 /* parameters for figures */
-#define NUM_FIGURES				38
+#define NUM_FIGURES				39
 #define NUM_BIG_NUM				10
 #define BIG_NUM_WIDTH			7
 #define BIG_NUM_HEIGHT			16
 #define FIGURE_WIDTH			5
 #define FIGURE_HEIGHT			7
-#define MSG_COL_NUM				8
+#define MSG_COL_NUM				7
 #define FIRST_ROW_LEVEL			10
 #define MIDDLE_ROW_LEVEL		6
-#define DISPLAY_TIME			4000
 #define BOARD_FADEOUT_TIME		1000
+#define MSG_DURATION			4000
+#define QUICK_NOTE_DURATION		1000
+#define WORD_SPACING			2
 
 /* parameters for clock */
 #define HR_1_POS				0
@@ -88,7 +90,7 @@
 #define PROCESSOR_SIZE			8
 
 /* WiFi and UDP */
-#define MAX_PACKET_SIZE			66
+#define MAX_PACKET_SIZE			100
 
 /* command prefixes */
 #define CMD_MODE				"/mode"
@@ -102,9 +104,11 @@
 #define MODE_PROCESSOR			"processor"
 #define MODE_LOOP				"loop"
 #define MODE_NETWORK			"network"
-#define MODE_CLOCK				"clock"
+#define MODE_CLOCK_D			"clockd"
+#define MODE_CLOCK_W			"clockw"
 #define MODE_TEST				"test"
 #define MODE_AUDIO				"audio"
+#define MODE_MESSAGE			"message"
 
 #define COLOR_RAINBOW_H			"rainbowh"
 #define COLOR_RAINBOW_V			"rainbowv"
@@ -124,7 +128,9 @@ typedef enum modeTypes {
 	LIGHT_SHOW_PROCESSOR,
 	LIGHT_SHOW_LOOP,
 	LIGHT_SHOW_NETWORK,
-	CLOCK,
+	CLOCK_DIGITAL,
+	CLOCK_WORD,
+	MESSAGE_BOARD,
 	TEST,
 	AUDIO_VISUALIZER
 } WallMode;
@@ -146,7 +152,7 @@ typedef enum colors {
 /* all figures that be displayed on led wall */
 typedef enum figures {
 	N0, N1, N2, N3, N4, N5, N6, N7, N8, N9,
-	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST
+	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST, SPACE
 } Figure;
 
 typedef enum bigNumbers {

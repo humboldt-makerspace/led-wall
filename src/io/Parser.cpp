@@ -15,17 +15,17 @@ int Parser::parseValue (String cmd)
 		}
 		else {
 			if (begin == -1) begin = i;
-			if (i == cmd.length() - 1) end = i;
+			if (i == cmd.length() - 1) end = i + 1;
 		}
 	}
 	if (begin == -1) return -1;
-	return begin == end ? Misc::charToInt(cmd.charAt(begin)) : (cmd.substring(begin, end)).toInt();
+	return (cmd.substring(begin, end)).toInt();
 }
 
 CRGB Parser::parseColor (String cmd)
 {
 	int firstCom = cmd.indexOf(',');
-	int secondCom = cmd.indexOf(',');
+	int secondCom = cmd.lastIndexOf(',');
 	int r = Parser::parseValue(cmd);
 	int g = Parser::parseValue(cmd.substring(firstCom));
 	int b = Parser::parseValue(cmd.substring(secondCom));
@@ -36,7 +36,8 @@ CRGB Parser::parseColor (String cmd)
 WallMode Parser::parseWallMode (String cmd)
 {
 	if (cmd.endsWith(MODE_AUDIO)) return AUDIO_VISUALIZER;
-	else if (cmd.endsWith(MODE_CLOCK)) return CLOCK;
+	else if (cmd.endsWith(MODE_CLOCK_D)) return CLOCK_DIGITAL;
+	else if (cmd.endsWith(MODE_CLOCK_W)) return CLOCK_WORD;
 	else if (cmd.endsWith(MODE_LOOP)) return LIGHT_SHOW_LOOP;
 	else if (cmd.endsWith(MODE_MATRIX)) return LIGHT_SHOW_MATRIX_VIBE;
 	else if (cmd.endsWith(MODE_NETWORK)) return LIGHT_SHOW_NETWORK;
@@ -44,6 +45,7 @@ WallMode Parser::parseWallMode (String cmd)
 	else if (cmd.endsWith(MODE_PROCESSOR)) return LIGHT_SHOW_PROCESSOR;
 	else if (cmd.endsWith(MODE_STATIC)) return LIGHT_SHOW_STATIC_COLOR;
 	else if (cmd.endsWith(MODE_TEST)) return TEST;
+	else if (cmd.endsWith(MODE_MESSAGE)) return MESSAGE_BOARD;
 	else return (WallMode)(-1);
 }
 

@@ -9,7 +9,7 @@ void Clock::getTime (void)
   	gmtm = localtime(&now);
 }
 
-void Clock::showTime (void)
+void Clock::showTimeDigits (void)
 {	
 	getTime();
 	
@@ -25,4 +25,12 @@ void Clock::showTime (void)
 
 	Figures::displayNumber((BigNumber)(gmtm->tm_sec / 10), SEC_1_POS, NUMBER_LEVEL);
 	Figures::displayNumber((BigNumber)(gmtm->tm_sec % 10), SEC_2_POS, NUMBER_LEVEL);
+}
+
+void Clock::showTimeWords (void)
+{
+	getTime();
+
+	MessageBoard::displayTwoWordNumbers(gmtm->tm_hour / 10, gmtm->tm_hour % 10, FIRST_ROW_LEVEL);
+	MessageBoard::displayTwoWordNumbers(gmtm->tm_min / 10, gmtm->tm_min % 10, 0);
 }

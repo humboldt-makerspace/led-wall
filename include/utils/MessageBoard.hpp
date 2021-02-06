@@ -19,10 +19,11 @@ public:
 
 	/* functions */
 	static void initColorSet (void);
-	static void showMessage (String msg);
+	static void showMessage (String msg, int duration);
 	static void clearBoard (void);
-	static void letterShiftTest (void);
+	static void shiftMessage (String msg);
 	static Format defineFormat (String msg);
+	static void displayTwoWordNumbers (int num1, int num2, int height);
 };
 
 #endif

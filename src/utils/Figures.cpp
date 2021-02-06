@@ -6,6 +6,7 @@ boolean Figures::numbers[NUM_BIG_NUM][BIG_NUM_WIDTH][BIG_NUM_HEIGHT];
 
 Figure Figures::charToFigure (char c)
 {
+	if (isWhitespace(c)) return SPACE;
 	switch (c) {
 		case 'a':
 		case 'A': return A;
@@ -101,12 +102,7 @@ void Figures::defineAlphabet (void)
 					if (x >= 0 && x < 4) {
 						alphabet[B][x][y] = true;
 						alphabet[D][x][y] = true;
-						alphabet[S][x][y] = true;
 						alphabet[N5][x][y] = true;
-					}
-					if (x > 0 && x <= 4) {
-						alphabet[C][x][y] = true;
-						alphabet[S][x][y] = true;
 					}
 					if (x >= 0 && x <= 4) {
 						alphabet[E][x][y] = true;
@@ -130,6 +126,8 @@ void Figures::defineAlphabet (void)
 						alphabet[N6][x][y] = true;
 						alphabet[N8][x][y] = true;
 						alphabet[N9][x][y] = true;
+						alphabet[S][x][y] = true;
+						alphabet[C][x][y] = true;
 					}
 					if (x != 0 && x != 3) {
 						alphabet[Q][x][y] = true;
@@ -167,9 +165,10 @@ void Figures::defineAlphabet (void)
 						alphabet[N6][x][y] = true;
 						alphabet[N8][x][y] = true;
 						alphabet[N9][x][y] = true;
+						alphabet[S][x][y] = true;
+						alphabet[C][x][y] = true;
 					}
 					if (x == 0) {
-						alphabet[C][x][y] = true;
 						alphabet[E][x][y] = true;
 						alphabet[F][x][y] = true;
 						alphabet[L][x][y] = true;
@@ -192,7 +191,6 @@ void Figures::defineAlphabet (void)
 						alphabet[N][x][y] = true;
 					}
 					if (x == 4) {
-						alphabet[S][x][y] = true;
 						alphabet[N4][x][y] = true;
 						alphabet[N5][x][y] = true;
 					}
@@ -421,9 +419,9 @@ void Figures::defineAlphabet (void)
 						alphabet[N8][x][y] = true;
 						alphabet[N9][x][y] = true;
 						alphabet[QUEST][x][y] = true;
+						alphabet[C][x][y] = true;
 					}
 					if (x == 0) {
-						alphabet[C][x][y] = true;
 						alphabet[E][x][y] = true;
 						alphabet[F][x][y] = true;
 						alphabet[G][x][y] = true;
@@ -470,6 +468,8 @@ void Figures::defineAlphabet (void)
 						alphabet[N8][x][y] = true;
 						alphabet[N9][x][y] = true;
 						alphabet[QUEST][x][y] = true;
+						alphabet[S][x][y] = true;
+						alphabet[C][x][y] = true;
 					}
 					if (x >= 0 && x < 4) {
 						alphabet[B][x][y] = true;
@@ -478,9 +478,7 @@ void Figures::defineAlphabet (void)
 						alphabet[R][x][y] = true;
 					}
 					if (x > 0 && x <= 4) {
-						alphabet[C][x][y] = true;
 						alphabet[G][x][y] = true;
-						alphabet[S][x][y] = true;
 					}
 					if (x >= 0 && x <= 4) {
 						alphabet[E][x][y] = true;
@@ -658,6 +656,16 @@ void Figures::displayFigure (Figure figure, int x, int y, CRGB color)
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
 			if (!alphabet[figure][i][j]) Interface::fadeToColor(x + i, y + j, CRGB::Black, FADE_FACTOR_FIGURE);
 			else Interface::fadeToColor(x + i, y + j, color, FADE_FACTOR_FIGURE);
+		}
+	}
+}
+
+void Figures::displayFigureHard (Figure figure, int x, int y, CRGB color)
+{
+	for (int i = 0; i < FIGURE_WIDTH; i++) {
+		for (int j = 0; j < FIGURE_HEIGHT; j++) {
+			if (!alphabet[figure][i][j]) Interface::ledOff(x + i, y + j);
+			else Interface::ledOn(x + i, y + j, color);
 		}
 	}
 }

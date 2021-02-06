@@ -1,6 +1,7 @@
 #include "includes.h"
 
 String inc;
+String lastMsg;
 
 void setup ()
 {
@@ -10,11 +11,12 @@ void setup ()
 }
 
 void loop ()
-{	
+{
 	Interface::readButtons();
 	inc = UDPManager::readPackage();
 	UDPManager::processCommand(inc);
-	MessageBoard::showMessage(inc);
+	MessageBoard::showMessage(inc, MSG_DURATION);
+	if (!inc.isEmpty() && inc.charAt(0) != '/') lastMsg = inc;
 
 	switch (Interface::mode) {
 		case LIGHT_SHOW_PRIDE: {
@@ -37,8 +39,20 @@ void loop ()
 			LightShow::looping();
 			break;
 		}
-		case CLOCK: {
-			Clock::showTime();
+		case LIGHT_SHOW_NETWORK: {
+			LightShow::networkAnimation();
+			break;
+		}
+		case CLOCK_DIGITAL: {
+			Clock::showTimeDigits();
+			break;
+		}
+		case CLOCK_WORD: {
+			Clock::showTimeWords();
+			break;
+		}
+		case MESSAGE_BOARD: {
+			MessageBoard::shiftMessage(lastMsg);
 			break;
 		}
 		case AUDIO_VISUALIZER: {
@@ -46,13 +60,13 @@ void loop ()
 			break;
 		}
 		case TEST: {
-			MessageBoard::letterShiftTest();
-			//Interface::allLedsOff();
+			Interface::allLedsOff();
 			break;
 		}
 		default: {
 			break;
 		}
 	}
+	
 	FastLED.show();
 }

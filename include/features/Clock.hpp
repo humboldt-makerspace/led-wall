@@ -13,7 +13,8 @@ public:
 	static tm* gmtm;
 
 	/* functions */
-	static void showTime (void);
+	static void showTimeDigits (void);
+	static void showTimeWords (void);
 };
 
 #endif
