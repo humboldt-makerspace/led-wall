@@ -9,6 +9,7 @@ double AudioAnalyzer::vImag[SAMPLES];
 double AudioAnalyzer::vReal[SAMPLES];
 arduinoFFT AudioAnalyzer::FFT = arduinoFFT(AudioAnalyzer::vReal, AudioAnalyzer::vImag, SAMPLES, SAMPLING_FREQUENCY);
 
+// never use sample 0
 void AudioAnalyzer::audioFFT (void)
 {
 	for (int i = 0; i < SAMPLES; i++) {

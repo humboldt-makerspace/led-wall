@@ -26,10 +26,10 @@ void initLeds (void)
 
 void initWallStatus (void)
 {
-	Interface::mode = WallMode::LIGHT_SHOW_MATRIX_VIBE;
+	Interface::mode = WallMode::AUDIO_VISUALIZER;
 	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
-	Interface::brightness = 50;
-	FastLED.setBrightness(50);
+	Interface::brightness = 255;
+	FastLED.setBrightness(255);
 	ColorGradient::changeColorGradient(Interface::cmode);
 	Figures::defineNumbers();
 	Figures::defineAlphabet();

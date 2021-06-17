@@ -8,6 +8,7 @@ void setup ()
 	Setup::init();
 	AudioVisualizer::flushBuffer();
 	MessageBoard::initColorSet();
+	AudioVisualizer::init();
 }
 
 void loop ()

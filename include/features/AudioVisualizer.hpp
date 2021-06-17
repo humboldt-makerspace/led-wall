@@ -8,6 +8,8 @@ private:
 	/* variables */
 	static int bufferCounter[WALL_WIDTH];
 	static double spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
+	static double logBaseAudio;
+	static int samplingRange;
 
 	/* functions */
 	static void updateBuffer (double value, int pos);
@@ -16,6 +18,7 @@ private:
 
 public:
 	/* functions */
+	static void init (void);
 	static void visualizeAudio (void);
 	static void flushBuffer (void);
 };

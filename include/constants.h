@@ -29,15 +29,13 @@
 #define AUDIO_PIN				35
 
 /* values for FFT */
-#define SAMPLES					1024
-#define SAMPLING_RANGE			256
+#define SAMPLES					128
 #define SAMPLING_FREQUENCY		36000
 #define MIN_AMPL				10
 #define MAX_AMPL				800
 #define BUFFER_SIZE				3
-#define LOG_BASE				1.0160377266	//1.007939707 with 512 //pow(WALL_WIDTH, 1 / (SAMPLING_RANGE - 2))
-#define LOW_FREQ_DAMPER			1.043 			//1.045 forward
-#define BUFFER_DEC				MAX_AMPL / 5
+#define LOW_FREQ_DAMPER			1.03 //1.043 			//1.045 forward
+#define BUFFER_DEC				MAX_AMPL / 6
 
 /* parameters to change color and brightness */
 #define COLOR_INC				40
