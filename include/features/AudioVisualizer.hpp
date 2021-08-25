@@ -10,11 +10,15 @@ private:
 	static double spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
 	static double logBaseAudio;
 	static int samplingRange;
+	static int maxBarHeight;
+	static int maxAmpl;
+	static float bufferDec;
 
 	/* functions */
 	static void updateBuffer (double value, int pos);
 	static void flattenBuffer (int pos);
 	static double getAvgValue (int pos);
+	static void adjustMaxAmpl (void);
 
 public:
 	/* functions */

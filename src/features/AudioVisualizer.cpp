@@ -5,11 +5,27 @@ int AudioVisualizer::bufferCounter[WALL_WIDTH];
 double AudioVisualizer::spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
 double AudioVisualizer::logBaseAudio = 0;
 int AudioVisualizer::samplingRange = 0;
+int AudioVisualizer::maxBarHeight = 0;
+int AudioVisualizer::maxAmpl;
+float AudioVisualizer::bufferDec;
+long adjustAmpTimer = 0;
 
 void AudioVisualizer::init (void)
 {
 	AudioVisualizer::samplingRange = SAMPLES / 1.2;
 	AudioVisualizer::logBaseAudio = pow(WALL_WIDTH, 1.0 / (AudioVisualizer::samplingRange - 2));
+	AudioVisualizer::maxAmpl = MAX_AMPL_DEFAULT;
+	AudioVisualizer::bufferDec = BUFFER_DEC_DEFAULT;
+}
+
+void AudioVisualizer::adjustMaxAmpl (void)
+{
+	if (millis() - adjustAmpTimer < ADJUST_AMP_TIME) return;
+	adjustAmpTimer = millis();
+	// if (AudioVisualizer::maxBarHeight < IGNORE_NOISE) return;
+	AudioVisualizer::maxAmpl = (int)(AudioVisualizer::maxAmpl * (float)((float)AudioVisualizer::maxBarHeight / (float)WALL_HEIGHT));
+	if (AudioVisualizer::maxAmpl < MIN_AMPL) AudioVisualizer::maxAmpl = MIN_AMPL + 50;
+	AudioVisualizer::maxBarHeight = 0;
 }
 
 void AudioVisualizer::flushBuffer (void)
@@ -30,7 +46,7 @@ void AudioVisualizer::updateBuffer (double value, int pos)
 void AudioVisualizer::flattenBuffer (int pos)
 {
 	for (int i = 0; i < BUFFER_SIZE; i++) {
-		spectrumBuffer[pos][i] -= BUFFER_DEC;
+		spectrumBuffer[pos][i] -= AudioVisualizer::bufferDec;
 		if (spectrumBuffer[pos][i] < 0) spectrumBuffer[pos][i] = 0;
 	}
 }
@@ -70,11 +86,13 @@ void AudioVisualizer::visualizeAudio (void)
 
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		if (spectrum[i] > getAvgValue(i)) updateBuffer(spectrum[i], i);
-		int barHeight = WALL_HEIGHT * (getAvgValue(i) - MIN_AMPL) / (MAX_AMPL - MIN_AMPL);
+		int barHeight = WALL_HEIGHT * (getAvgValue(i) - MIN_AMPL) / (AudioVisualizer::maxAmpl - MIN_AMPL);
 		if (barHeight < 0) barHeight = 0;
-		if (barHeight > WALL_HEIGHT) barHeight = WALL_HEIGHT;
+		if (barHeight > AudioVisualizer::maxBarHeight) AudioVisualizer::maxBarHeight = barHeight;
+		// if (barHeight > WALL_HEIGHT - 1) barHeight = WALL_HEIGHT - 1;
 		Bars::showBar(i, barHeight);
 		flattenBuffer(i);
 	}
+	AudioVisualizer::adjustMaxAmpl();
 	//Interface::ledOn(WALL_WIDTH - 1, 0, ColorGradient::colors[WALL_WIDTH - 1][0]);
 }
