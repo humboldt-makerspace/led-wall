@@ -14,10 +14,10 @@ void setup ()
 void loop ()
 {
 	Interface::readButtons();
-	inc = UDPManager::readPackage();
-	UDPManager::processCommand(inc);
-	MessageBoard::showMessage(inc, MSG_DURATION);
-	if (!inc.isEmpty() && inc.charAt(0) != '/') lastMsg = inc;
+	//inc = UDPManager::readPackage();
+	//UDPManager::processCommand(inc);
+	//MessageBoard::showMessage(inc, MSG_DURATION);
+	//if (!inc.isEmpty() && inc.charAt(0) != '/') lastMsg = inc;
 
 	switch (Interface::mode) {
 		case LIGHT_SHOW_PRIDE: {
@@ -70,4 +70,9 @@ void loop ()
 	}
 	
 	FastLED.show();
+	// int port = 2;
+	// Serial.print("Port: ");
+	// Serial.print(port);
+	// Serial.print(" ");
+	// Serial.println(analogRead(port));
 }

@@ -72,7 +72,7 @@ void Setup::initWifi (void)
 void Setup::init (void)
 {
 	Serial.begin(115200);
-	initWifi();
+	//initWifi();
 	initButtons();
 	initLeds();
 	initWallStatus();

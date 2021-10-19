@@ -80,9 +80,9 @@ void AudioVisualizer::visualizeAudio (void)
 		if (end != begin) spectrum[i] = spectrum[i] / (end - begin);
 		spectrum[i] = spectrum[i] / pow(LOW_FREQ_DAMPER, WALL_WIDTH - i);
 	}
-	spectrum[0] = spectrum[0] / 4.5;
-	spectrum[1] = spectrum[1] / 3.0;
-	spectrum[2] = spectrum[2] / 2.5;
+	spectrum[0] = spectrum[0] / 5.0;
+	spectrum[1] = spectrum[1] / 3.5;
+	spectrum[2] = spectrum[2] / 3.5;
 
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		if (spectrum[i] > getAvgValue(i)) updateBuffer(spectrum[i], i);
@@ -95,4 +95,6 @@ void AudioVisualizer::visualizeAudio (void)
 	}
 	AudioVisualizer::adjustMaxAmpl();
 	//Interface::ledOn(WALL_WIDTH - 1, 0, ColorGradient::colors[WALL_WIDTH - 1][0]);
+	// Serial.print("AUDIO SIGNAL: ");
+	// Serial.println(spectrum[1]);
 }
