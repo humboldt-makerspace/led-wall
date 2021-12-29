@@ -17,7 +17,7 @@ void AudioAnalyzer::audioFFT (void)
     	oldTime = newTime;
     	vReal[i] = analogRead(AUDIO_PIN) - 2900;
     	vImag[i] = 0;
-    	while (micros() < (newTime + samplingPeriodUs));
+    	while (micros() - newTime < samplingPeriodUs);
   	}
   	FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
   	FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
