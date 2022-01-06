@@ -34,8 +34,9 @@
 #define MIN_AMPL				10
 #define MAX_AMPL_DEFAULT		800
 #define BUFFER_SIZE				3
+#define DEC_DIV					8
 #define LOW_FREQ_DAMPER			1.03 //1.043 			//1.045 forward
-#define BUFFER_DEC_DEFAULT		MAX_AMPL_DEFAULT / 6
+#define BUFFER_DEC_DEFAULT		MAX_AMPL_DEFAULT / DEC_DIV
 #define ADJUST_AMP_TIME			10000
 #define IGNORE_NOISE			3
 

@@ -8,30 +8,30 @@ int Moving::maxNumDots = 0;
 void Moving::resetDots (void)
 {
 	for (int i = 0; i < MAX_NUM_DOTS; i++) {
-		Moving::dots[i].p.x = -1;
-		Moving::dots[i].p.y = -1;
+		dots[i].p.x = -1;
+		dots[i].p.y = -1;
 		for (int j = 0; j < LAST_FIELDS_NUM; j++) {
-			Moving::dots[i].last[j].x = -1;
-			Moving::dots[i].last[j].y = -1;
+			dots[i].last[j].x = -1;
+			dots[i].last[j].y = -1;
 		}
-		Moving::dots[i].outCounter = -1;
-		Moving::dots[i].bufferIndex = 0;
+		dots[i].outCounter = -1;
+		dots[i].bufferIndex = 0;
 	}
-	Moving::activeDots = 0;
+	activeDots = 0;
 }
 
 void Moving::createDot (int x, int y, Direction dir)
 {
-	if (Moving::activeDots >= Moving::maxNumDots) return;
+	if (activeDots >= maxNumDots) return;
 	for (int i = 0; i < MAX_NUM_DOTS; i++) {
-		if (Moving::dots[i].outCounter != -1) continue;
-		Moving::dots[i].p.x = x;
-		Moving::dots[i].p.y = y;
-		Moving::dots[i].outCounter = 0;
-		Moving::dots[i].dir = dir;
+		if (dots[i].outCounter != -1) continue;
+		dots[i].p.x = x;
+		dots[i].p.y = y;
+		dots[i].outCounter = 0;
+		dots[i].dir = dir;
 		break;
 	}
-	Moving::activeDots++;
+	activeDots++;
 }
 
 void Moving::removeDot (Dot* dot)
@@ -52,7 +52,7 @@ void Moving::autoResetDot (Dot* dot)
 				dot->last[j].y = -1;
 			}
 			dot->outCounter = -1;
-			Moving::activeDots--;
+			activeDots--;
 		}
 		else dot->outCounter++;
 	}
@@ -98,7 +98,7 @@ void Moving::moveDot (Dot* dot)
 {
 	if (Misc::outOfBounds(dot->p.x, dot->p.y)) return;
 
-	Moving::updateBuffer(dot);
+	updateBuffer(dot);
 
 	switch (dot->dir) {
 		case UP: {

@@ -13,6 +13,8 @@ private:
 	static int maxBarHeight;
 	static int maxAmpl;
 	static float bufferDec;
+	static int begin[WALL_WIDTH];
+	static int end[WALL_WIDTH];
 
 	/* functions */
 	static void updateBuffer (double value, int pos);

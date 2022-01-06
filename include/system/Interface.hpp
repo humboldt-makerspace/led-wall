@@ -53,10 +53,10 @@ public:
 	static void statusLedOn (void);
 	static void statusLedOff (void);
 	static CRGB getColor (void);
-	static void setMode (WallMode mode);
+	static void setMode (WallMode newMode);
 	static void setBrightness (uint8_t brightness);
 	static void setColor (CRGB color);
-	static void setColorMode (ColorMode cmode);
+	static void setColorMode (ColorMode colorMode);
 };
 
 #endif

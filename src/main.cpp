@@ -3,7 +3,7 @@
 String inc;
 String lastMsg;
 
-void setup ()
+void setup (void)
 {
 	Setup::init();
 	AudioVisualizer::flushBuffer();
@@ -11,7 +11,7 @@ void setup ()
 	AudioVisualizer::init();
 }
 
-void loop ()
+void loop (void)
 {
 	Interface::readButtons();
 	//inc = UDPManager::readPackage();

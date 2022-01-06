@@ -26,9 +26,9 @@ CRGB Parser::parseColor (String cmd)
 {
 	int firstCom = cmd.indexOf(',');
 	int secondCom = cmd.lastIndexOf(',');
-	int r = Parser::parseValue(cmd);
-	int g = Parser::parseValue(cmd.substring(firstCom));
-	int b = Parser::parseValue(cmd.substring(secondCom));
+	int r = parseValue(cmd);
+	int g = parseValue(cmd.substring(firstCom));
+	int b = parseValue(cmd.substring(secondCom));
 	if (r == -1 || g == -1 || b == -1) return CRGB::Black;
 	return CRGB(r, g, b);
 }

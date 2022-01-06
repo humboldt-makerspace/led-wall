@@ -16,7 +16,7 @@ void Interface::ledOn (int x, int y, CRGB color)
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
-	Interface::leds[block][pos] = color;
+	leds[block][pos] = color;
 }
 
 void Interface::ledOff (int x, int y)
@@ -24,7 +24,7 @@ void Interface::ledOff (int x, int y)
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
-	Interface::leds[block][pos] = CRGB::Black;
+	leds[block][pos] = CRGB::Black;
 }
 
 void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
@@ -32,14 +32,14 @@ void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
 	int block = Mapping::getBlock(y);
-	nblend(Interface::leds[block][pos], color, fadefactor);
+	nblend(leds[block][pos], color, fadefactor);
 }
 
 void Interface::allLedsOff (void)
 {
 	for (int i = 0; i < NUM_DATA_PINS; i++) {
 		for (int j = 0; j < NUM_LEDS; j++) {
-			Interface::leds[i][j] = CRGB::Black;
+			leds[i][j] = CRGB::Black;
 		}
 	}
 }
@@ -48,7 +48,7 @@ void Interface::fadeOutAll (uint8_t fadefactor)
 {
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		for (int j = 0; j < WALL_HEIGHT; j++) {
-			Interface::fadeToColor(i, j, CRGB::Black, fadefactor);
+			fadeToColor(i, j, CRGB::Black, fadefactor);
 		}
 	}
 }
@@ -70,9 +70,9 @@ CRGB Interface::getColor (void)
 
 void Interface::setColor (CRGB color)
 {
-	Interface::r = color.r;
-	Interface::g = color.g;
-	Interface::b = color.b;
+	r = color.r;
+	g = color.g;
+	b = color.b;
 }
 
 void Interface::changeBrightness (void)
@@ -86,7 +86,7 @@ void Interface::changeBrightness (void)
 
 void Interface::setBrightness (uint8_t brightness)
 {
-	Interface::brightness = brightness;
+	brightness = brightness;
 	FastLED.setBrightness(brightness);
 }
 
@@ -182,14 +182,14 @@ void Interface::changeMode (void)
 		mode = (WallMode) tmp;
 	}
 	initModes(mode);
-	Interface::allLedsOff();
+	allLedsOff();
 }
 
-void Interface::setMode (WallMode mode)
+void Interface::setMode (WallMode newMode)
 {
-	Interface::mode = mode;
+	mode = newMode;
 	initModes(mode);
-	Interface::allLedsOff();
+	allLedsOff();
 }
 
 void Interface::switchColors (void)
@@ -219,9 +219,9 @@ void Interface::switchColors (void)
 	ColorGradient::changeColorGradient(cmode);
 }
 
-void Interface::setColorMode (ColorMode cmode)
+void Interface::setColorMode (ColorMode colorMode)
 {
-	Interface::cmode = cmode;
+	cmode = colorMode;
 	ColorGradient::changeColorGradient(cmode);
 }
 
