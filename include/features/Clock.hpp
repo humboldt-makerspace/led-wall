@@ -6,15 +6,15 @@
 class Clock {
 private:
 	/* functions */
-	static void getTime (void);
+	static void getTime(void);
 
 public:
 	/* variables */
-	static tm* gmtm;
+	static tm *gmtm;
 
 	/* functions */
-	static void showTimeDigits (void);
-	static void showTimeWords (void);
+	static void showTimeDigits(void);
+	static void showTimeWords(void);
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "system/Setup.hpp"
 #include "system/Interface.hpp"
 
-void initStatusLed (void)
+void initStatusLed(void)
 {
 	pinMode(STATUS_LED_PIN, OUTPUT);
 	digitalWrite(STATUS_LED_PIN, HIGH);
@@ -9,7 +9,7 @@ void initStatusLed (void)
 	digitalWrite(STATUS_LED_PIN, LOW);
 }
 
-void initButtons (void)
+void initButtons(void)
 {
 	pinMode(BUTTON_1_PIN, INPUT_PULLUP);
 	pinMode(BUTTON_2_PIN, INPUT_PULLUP);
@@ -17,14 +17,14 @@ void initButtons (void)
 	for (int i = 0; i < NUM_BUTTONS; i++) Interface::btnPressed[i] = false;
 }
 
-void initLeds (void)
+void initLeds(void)
 {
 	FastLED.addLeds<WS2812B, LED_PIN_1, GRB>(Interface::leds[0], NUM_LEDS);
 	FastLED.addLeds<WS2812B, LED_PIN_2, GRB>(Interface::leds[1], NUM_LEDS);
 	FastLED.addLeds<WS2812B, LED_PIN_3, GRB>(Interface::leds[2], NUM_LEDS);
 }
 
-void initWallStatus (void)
+void initWallStatus(void)
 {
 	Interface::mode = WallMode::AUDIO_VISUALIZER;
 	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
@@ -37,7 +37,7 @@ void initWallStatus (void)
 	Moving::maxNumDots = MAX_NUM_DOTS_MATRIX;
 }
 
-void Setup::initWifi (void)
+void Setup::initWifi(void)
 {
 	Serial.print("MAC: ");
 	Serial.println(WiFi.macAddress());
@@ -47,8 +47,7 @@ void Setup::initWifi (void)
 	Serial.println();
 	Serial.print("Wait for WiFi... ");
 
-	while (WiFi.status() != WL_CONNECTED)
-	{
+	while (WiFi.status() != WL_CONNECTED) {
 		Serial.print(".");
 		delay(500);
 	}
@@ -59,17 +58,17 @@ void Setup::initWifi (void)
 	UDPManager::UDPServer.begin(UDP_PORT);
 
 	configTime(TIME_ZONE * 3600, DST * 0, NTP_SERVER);
-  	Serial.println("\nWaiting for time");
-  	while (!time(nullptr)) {
-    	Serial.print(".");
-    	delay(1000);
-  	}
-  	Serial.println("");
+	Serial.println("\nWaiting for time");
+	while (!time(nullptr)) {
+		Serial.print(".");
+		delay(1000);
+	}
+	Serial.println("");
 	time_t now = time(nullptr);
-  	Serial.println(ctime(&now));
+	Serial.println(ctime(&now));
 }
 
-void Setup::init (void)
+void Setup::init(void)
 {
 	Serial.begin(115200);
 	//initWifi();

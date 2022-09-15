@@ -31,9 +31,9 @@ private:
 	static boolean buttons[NUM_BUTTONS];
 
 	/* functions */
-	static void changeBrightness (void);
-	static void changeMode (void);
-	static void switchColors (void);
+	static void changeBrightness(void);
+	static void changeMode(void);
+	static void switchColors(void);
 
 public:
 	/* variables */
@@ -44,19 +44,19 @@ public:
 	static ColorMode cmode;
 
 	/* functions */
-	static void readButtons (void);
-	static void ledOn (int x, int y, CRGB color);
-	static void ledOff (int x, int y);
-	static void fadeToColor (int x, int y, CRGB color, uint8_t fadefactor);
-	static void allLedsOff (void);
-	static void fadeOutAll (uint8_t fadefactor);
-	static void statusLedOn (void);
-	static void statusLedOff (void);
-	static CRGB getColor (void);
-	static void setMode (WallMode newMode);
-	static void setBrightness (uint8_t brightness);
-	static void setColor (CRGB color);
-	static void setColorMode (ColorMode colorMode);
+	static void readButtons(void);
+	static void ledOn(int x, int y, CRGB color);
+	static void ledOff(int x, int y);
+	static void fadeToColor(int x, int y, CRGB color, uint8_t fadefactor);
+	static void allLedsOff(void);
+	static void fadeOutAll(uint8_t fadefactor);
+	static void statusLedOn(void);
+	static void statusLedOff(void);
+	static CRGB getColor(void);
+	static void setMode(WallMode newMode);
+	static void setBrightness(uint8_t brightness);
+	static void setColor(CRGB color);
+	static void setColorMode(ColorMode colorMode);
 };
 
 #endif

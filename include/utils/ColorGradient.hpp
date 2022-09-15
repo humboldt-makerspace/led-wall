@@ -10,14 +10,14 @@ private:
 	static CRGB colorsVertical[WALL_HEIGHT];
 
 	/* functions */
-	static void fillCompleteWall (ColorMode mode);
+	static void fillCompleteWall(ColorMode mode);
 
 public:
 	/* variables */
 	static CRGB colors[WALL_WIDTH][WALL_HEIGHT];
 
 	/* functions */
-	static void changeColorGradient (ColorMode mode);
+	static void changeColorGradient(ColorMode mode);
 };
 
 #endif

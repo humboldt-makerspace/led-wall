@@ -4,7 +4,7 @@
 boolean Figures::alphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];
 boolean Figures::numbers[NUM_BIG_NUM][BIG_NUM_WIDTH][BIG_NUM_HEIGHT];
 
-Figure Figures::charToFigure (char c)
+Figure Figures::charToFigure(char c)
 {
 	if (isWhitespace(c)) return SPACE;
 	switch (c) {
@@ -76,7 +76,7 @@ Figure Figures::charToFigure (char c)
 	}
 }
 
-void Figures::defineAlphabet (void)
+void Figures::defineAlphabet(void)
 {
 	for (int i = 0; i < NUM_FIGURES; i++) {
 		for (int x = 0; x < FIGURE_WIDTH; x++) {
@@ -518,7 +518,7 @@ void Figures::defineAlphabet (void)
 	}
 }
 
-void Figures::defineNumbers (void)
+void Figures::defineNumbers(void)
 {
 	for (int i = 0; i < NUM_BIG_NUM; i++) {
 		for (int x = 0; x < BIG_NUM_WIDTH; x++) {
@@ -580,7 +580,7 @@ void Figures::defineNumbers (void)
 				y == 1 ||
 				y == BIG_NUM_HEIGHT - 1 ||
 				y == BIG_NUM_HEIGHT - 2) numbers[Z5][x][y] = true;
-			
+
 			/* 6 */
 			if (x == 0 ||
 				x == 1 ||
@@ -591,7 +591,7 @@ void Figures::defineNumbers (void)
 				y == 1 ||
 				y == BIG_NUM_HEIGHT - 1 ||
 				y == BIG_NUM_HEIGHT - 2) numbers[Z6][x][y] = true;
-			
+
 			/* 7 */
 			if (x == BIG_NUM_WIDTH - 1 ||
 				x == BIG_NUM_WIDTH - 2 ||
@@ -624,13 +624,13 @@ void Figures::defineNumbers (void)
 	}
 }
 
-void Figures::displayColon (int x, int y)
-{	
+void Figures::displayColon(int x, int y)
+{
 	Interface::ledOn(x, y, ColorGradient::colors[x][y]);
 	Interface::ledOn(x, y + 3, ColorGradient::colors[x][y + 3]);
 }
 
-void Figures::displayNumber (BigNumber number, int x, int y)
+void Figures::displayNumber(BigNumber number, int x, int y)
 {
 	for (int i = 0; i < BIG_NUM_WIDTH; i++) {
 		for (int j = 0; j < BIG_NUM_HEIGHT; j++) {
@@ -640,7 +640,7 @@ void Figures::displayNumber (BigNumber number, int x, int y)
 	}
 }
 
-void Figures::displayFigure (Figure figure, int x, int y)
+void Figures::displayFigure(Figure figure, int x, int y)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
@@ -650,7 +650,7 @@ void Figures::displayFigure (Figure figure, int x, int y)
 	}
 }
 
-void Figures::displayFigure (Figure figure, int x, int y, CRGB color)
+void Figures::displayFigure(Figure figure, int x, int y, CRGB color)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
@@ -660,7 +660,7 @@ void Figures::displayFigure (Figure figure, int x, int y, CRGB color)
 	}
 }
 
-void Figures::displayFigureHard (Figure figure, int x, int y, CRGB color)
+void Figures::displayFigureHard(Figure figure, int x, int y, CRGB color)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {

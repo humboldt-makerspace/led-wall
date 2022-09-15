@@ -6,7 +6,7 @@ private:
 
 public:
 	/* functions */
-	static void showBar (int x, int y);
+	static void showBar(int x, int y);
 };
 
 #endif

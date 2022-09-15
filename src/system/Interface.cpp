@@ -11,7 +11,7 @@ int Interface::r = 0;
 int Interface::g = 255;
 int Interface::b = 0;
 
-void Interface::ledOn (int x, int y, CRGB color)
+void Interface::ledOn(int x, int y, CRGB color)
 {
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
@@ -19,7 +19,7 @@ void Interface::ledOn (int x, int y, CRGB color)
 	leds[block][pos] = color;
 }
 
-void Interface::ledOff (int x, int y)
+void Interface::ledOff(int x, int y)
 {
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
@@ -27,7 +27,7 @@ void Interface::ledOff (int x, int y)
 	leds[block][pos] = CRGB::Black;
 }
 
-void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
+void Interface::fadeToColor(int x, int y, CRGB color, uint8_t fadefactor)
 {
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
@@ -35,7 +35,7 @@ void Interface::fadeToColor (int x, int y, CRGB color, uint8_t fadefactor)
 	nblend(leds[block][pos], color, fadefactor);
 }
 
-void Interface::allLedsOff (void)
+void Interface::allLedsOff(void)
 {
 	for (int i = 0; i < NUM_DATA_PINS; i++) {
 		for (int j = 0; j < NUM_LEDS; j++) {
@@ -44,7 +44,7 @@ void Interface::allLedsOff (void)
 	}
 }
 
-void Interface::fadeOutAll (uint8_t fadefactor)
+void Interface::fadeOutAll(uint8_t fadefactor)
 {
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		for (int j = 0; j < WALL_HEIGHT; j++) {
@@ -53,29 +53,29 @@ void Interface::fadeOutAll (uint8_t fadefactor)
 	}
 }
 
-void Interface::statusLedOn (void)
+void Interface::statusLedOn(void)
 {
 	digitalWrite(STATUS_LED_PIN, HIGH);
 }
 
-void Interface::statusLedOff (void)
+void Interface::statusLedOff(void)
 {
 	digitalWrite(STATUS_LED_PIN, LOW);
 }
 
-CRGB Interface::getColor (void)
+CRGB Interface::getColor(void)
 {
 	return CRGB(r, g, b);
 }
 
-void Interface::setColor (CRGB color)
+void Interface::setColor(CRGB color)
 {
 	r = color.r;
 	g = color.g;
 	b = color.b;
 }
 
-void Interface::changeBrightness (void)
+void Interface::changeBrightness(void)
 {
 	if (brightness == 0) brightness = 255;
 	else brightness -= BRIGHTNESS_DEC;
@@ -84,13 +84,13 @@ void Interface::changeBrightness (void)
 	FastLED.setBrightness(brightness);
 }
 
-void Interface::setBrightness (uint8_t brightness)
+void Interface::setBrightness(uint8_t brightness)
 {
 	brightness = brightness;
 	FastLED.setBrightness(brightness);
 }
 
-void initColors (void)
+void initColors(void)
 {
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		for (int j = 0; j < WALL_HEIGHT; j++) {
@@ -103,7 +103,7 @@ void initColors (void)
 	}
 }
 
-void initModes (WallMode mode)
+void initModes(WallMode mode)
 {
 	switch (mode) {
 		case LIGHT_SHOW_LOOP: {
@@ -173,26 +173,26 @@ void initModes (WallMode mode)
 	}
 }
 
-void Interface::changeMode (void)
+void Interface::changeMode(void)
 {
 	if (mode == WallMode::AUDIO_VISUALIZER) mode = WallMode::LIGHT_SHOW_PRIDE;
 	else {
-		int tmp = (int) mode;
+		int tmp = (int)mode;
 		tmp++;
-		mode = (WallMode) tmp;
+		mode = (WallMode)tmp;
 	}
 	initModes(mode);
 	allLedsOff();
 }
 
-void Interface::setMode (WallMode newMode)
+void Interface::setMode(WallMode newMode)
 {
 	mode = newMode;
 	initModes(mode);
 	allLedsOff();
 }
 
-void Interface::switchColors (void)
+void Interface::switchColors(void)
 {
 	if (cmode == ColorMode::MONO) {
 		if (g == 255 && r < 255 && !b) r += COLOR_INC;
@@ -212,20 +212,20 @@ void Interface::switchColors (void)
 		if (g == 255 && !r && !b) cmode = ColorMode::RAINBOW_HORIZONTAL;
 	}
 	else {
-		int tmp = (int) cmode;
+		int tmp = (int)cmode;
 		tmp++;
-		cmode = (ColorMode) tmp;
+		cmode = (ColorMode)tmp;
 	}
 	ColorGradient::changeColorGradient(cmode);
 }
 
-void Interface::setColorMode (ColorMode colorMode)
+void Interface::setColorMode(ColorMode colorMode)
 {
 	cmode = colorMode;
 	ColorGradient::changeColorGradient(cmode);
 }
 
-void Interface::readButtons (void)
+void Interface::readButtons(void)
 {
 	buttons[0] = digitalRead(BUTTON_1_PIN);
 	buttons[1] = digitalRead(BUTTON_2_PIN);

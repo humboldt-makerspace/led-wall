@@ -11,14 +11,14 @@ private:
 
 public:
 	/* functions */
-	static void defineNumbers (void);
-	static void defineAlphabet (void);
-	static void displayNumber (BigNumber number, int x, int y);
-	static void displayFigure (Figure figure, int x, int y);
-	static void displayFigure (Figure figure, int x, int y, CRGB color);
-	static void displayFigureHard (Figure figure, int x, int y, CRGB color);
-	static void displayColon (int x, int y);
-	static Figure charToFigure (char c);
+	static void defineNumbers(void);
+	static void defineAlphabet(void);
+	static void displayNumber(BigNumber number, int x, int y);
+	static void displayFigure(Figure figure, int x, int y);
+	static void displayFigure(Figure figure, int x, int y, CRGB color);
+	static void displayFigureHard(Figure figure, int x, int y, CRGB color);
+	static void displayColon(int x, int y);
+	static Figure charToFigure(char c);
 };
 
 #endif

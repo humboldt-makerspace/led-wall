@@ -1,7 +1,7 @@
 #include "utils/Mapping.hpp"
 #include "system/Interface.hpp"
 
-int Mapping::getBlock (int y)
+int Mapping::getBlock(int y)
 {
 	switch (y) {
 		case 0 ... 5: return 0;
@@ -11,7 +11,7 @@ int Mapping::getBlock (int y)
 	}
 }
 
-int Mapping::getPos (int x, int y)
+int Mapping::getPos(int x, int y)
 {
 	switch (y) {
 		case 0: return x;

@@ -4,7 +4,7 @@
 WiFiUDP UDPManager::UDPServer;
 byte UDPManager::packetBuffer[MAX_PACKET_SIZE];
 
-String UDPManager::readPackage (void)
+String UDPManager::readPackage(void)
 {
 	String myData = "";
 	int cb = UDPServer.parsePacket();
@@ -18,7 +18,7 @@ String UDPManager::readPackage (void)
 	return myData;
 }
 
-void UDPManager::processCommand (String cmd)
+void UDPManager::processCommand(String cmd)
 {
 	if (cmd.isEmpty()) return;
 	cmd.toLowerCase();
@@ -38,7 +38,7 @@ void UDPManager::processCommand (String cmd)
 		}
 	}
 	else if (cmd.startsWith(CMD_BRIGHTNESS)) {
-		uint8_t value = (uint8_t) Parser::parseValue(cmd);
+		uint8_t value = (uint8_t)Parser::parseValue(cmd);
 		Interface::setBrightness(value);
 	}
 }

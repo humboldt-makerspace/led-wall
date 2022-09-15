@@ -5,7 +5,7 @@ Dot Moving::dots[MAX_NUM_DOTS];
 int Moving::activeDots = 0;
 int Moving::maxNumDots = 0;
 
-void Moving::resetDots (void)
+void Moving::resetDots(void)
 {
 	for (int i = 0; i < MAX_NUM_DOTS; i++) {
 		dots[i].p.x = -1;
@@ -20,7 +20,7 @@ void Moving::resetDots (void)
 	activeDots = 0;
 }
 
-void Moving::createDot (int x, int y, Direction dir)
+void Moving::createDot(int x, int y, Direction dir)
 {
 	if (activeDots >= maxNumDots) return;
 	for (int i = 0; i < MAX_NUM_DOTS; i++) {
@@ -34,13 +34,13 @@ void Moving::createDot (int x, int y, Direction dir)
 	activeDots++;
 }
 
-void Moving::removeDot (Dot* dot)
+void Moving::removeDot(Dot *dot)
 {
 	dot->p.x = -1;
 	dot->p.y = -1;
 }
 
-void Moving::autoResetDot (Dot* dot)
+void Moving::autoResetDot(Dot *dot)
 {
 	if (dot->outCounter == -1) return;
 	if (Misc::outOfBounds(dot->p.x, dot->p.y)) {
@@ -58,13 +58,13 @@ void Moving::autoResetDot (Dot* dot)
 	}
 }
 
-void Moving::updateBuffer (Dot* dot)
+void Moving::updateBuffer(Dot *dot)
 {
 	dot->last[dot->bufferIndex] = dot->p;
 	dot->bufferIndex == LAST_FIELDS_NUM - 1 ? dot->bufferIndex = 0 : dot->bufferIndex++;
 }
 
-void Moving::showDot (Dot* dot)
+void Moving::showDot(Dot *dot)
 {
 	if (dot->outCounter == -1) return;
 	for (int j = 0; j < LAST_FIELDS_NUM; j++) {
@@ -79,7 +79,7 @@ void Moving::showDot (Dot* dot)
 	}
 }
 
-void Moving::showDot (Dot* dot, CRGB color)
+void Moving::showDot(Dot *dot, CRGB color)
 {
 	if (dot->outCounter == -1) return;
 	for (int j = 0; j < LAST_FIELDS_NUM; j++) {
@@ -94,7 +94,7 @@ void Moving::showDot (Dot* dot, CRGB color)
 	}
 }
 
-void Moving::moveDot (Dot* dot)
+void Moving::moveDot(Dot *dot)
 {
 	if (Misc::outOfBounds(dot->p.x, dot->p.y)) return;
 

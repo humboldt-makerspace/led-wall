@@ -6,8 +6,8 @@ private:
 
 public:
 	/* functions */
-	static int getBlock (int y);
-	static int getPos (int x, int y);
+	static int getBlock(int y);
+	static int getPos(int x, int y);
 };
 
 #endif

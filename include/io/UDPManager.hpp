@@ -14,8 +14,8 @@ public:
 	static byte packetBuffer[MAX_PACKET_SIZE];
 
 	/* functions */
-	static String readPackage (void);
-	static void processCommand (String cmd);
+	static String readPackage(void);
+	static void processCommand(String cmd);
 };
 
 #endif

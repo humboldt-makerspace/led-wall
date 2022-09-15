@@ -1,7 +1,7 @@
 #include "features/LightShow.hpp"
 #include "system/Interface.hpp"
 
-void LightShow::pride (void)
+void LightShow::pride(void)
 {
 	static uint16_t sPseudotime = 0;
 	static uint16_t sLastMillis = 0;
@@ -16,7 +16,7 @@ void LightShow::pride (void)
 	uint16_t hueinc16 = beatsin88(113, 1, 3000);
 
 	uint16_t ms = millis();
-	uint16_t deltams = ms - sLastMillis ;
+	uint16_t deltams = ms - sLastMillis;
 	sLastMillis = ms;
 	sPseudotime += deltams * msmultiplier;
 	sHue16 += deltams * beatsin88(400, 5, 9);
@@ -27,7 +27,7 @@ void LightShow::pride (void)
 		uint8_t hue8 = hue16 / 256;
 
 		brightnesstheta16 += brightnessthetainc16;
-		uint16_t b16 = sin16( brightnesstheta16  ) + 32768;
+		uint16_t b16 = sin16(brightnesstheta16) + 32768;
 
 		uint16_t bri16 = (uint32_t)((uint32_t)b16 * (uint32_t)b16) / 65536;
 		uint8_t bri8 = (uint32_t)(((uint32_t)bri16) * brightdepth) / 65536;
@@ -44,7 +44,7 @@ void LightShow::pride (void)
 	}
 }
 
-void LightShow::staticColor (void)
+void LightShow::staticColor(void)
 {
 	for (int x = 0; x < WALL_WIDTH; x++) {
 		for (int y = 0; y < WALL_HEIGHT; y++) {
@@ -53,7 +53,7 @@ void LightShow::staticColor (void)
 	}
 }
 
-void LightShow::matrixVibe (void)
+void LightShow::matrixVibe(void)
 {
 	int col = rand() % 70;
 	if (col < WALL_WIDTH) Moving::createDot(col, WALL_HEIGHT - 1, DOWN);
@@ -65,7 +65,7 @@ void LightShow::matrixVibe (void)
 	delay(40);
 }
 
-bool insideProcessor (int x, int y)
+bool insideProcessor(int x, int y)
 {
 	return (x >= WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 &&
 			x < WALL_WIDTH / 2 + PROCESSOR_SIZE / 2 &&
@@ -73,7 +73,7 @@ bool insideProcessor (int x, int y)
 			y < WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2);
 }
 
-bool onProcessorEdge (int x, int y)
+bool onProcessorEdge(int x, int y)
 {
 	if ((x == WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 && y == WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2 - 1) ||
 		(x == WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 - 1 && y == WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2) ||
@@ -87,7 +87,7 @@ bool onProcessorEdge (int x, int y)
 			y <= WALL_HEIGHT / 2 + PROCESSOR_SIZE / 2) && !insideProcessor(x, y);
 }
 
-void showProcessor (void)
+void showProcessor(void)
 {
 	for (int i = 0; i < WALL_WIDTH; i++) {
 		for (int j = 0; j < WALL_HEIGHT; j++) {
@@ -98,13 +98,13 @@ void showProcessor (void)
 	}
 }
 
-void LightShow::processorAnimation (void)
+void LightShow::processorAnimation(void)
 {
 	showProcessor();
 	int randSide = rand() % 4;
 	int randInd;
 	randInd = randSide % 2 == 0 ? rand() % PROCESSOR_SIZE + WALL_WIDTH / 2 - PROCESSOR_SIZE / 2 :
-								  rand() % PROCESSOR_SIZE + WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2;
+		rand() % PROCESSOR_SIZE + WALL_HEIGHT / 2 - PROCESSOR_SIZE / 2;
 	switch (randSide) {
 		case 0: {
 			Moving::createDot(randInd, WALL_HEIGHT - 1, DOWN);
@@ -140,7 +140,7 @@ void LightShow::processorAnimation (void)
 	}
 }
 
-void changeDirectionLoop (Dot* dot, int i)
+void changeDirectionLoop(Dot *dot, int i)
 {
 	if (dot->p.x >= WALL_WIDTH - 1 - i && dot->p.y > 0 + i) {
 		dot->dir = DOWN;
@@ -156,7 +156,7 @@ void changeDirectionLoop (Dot* dot, int i)
 	}
 }
 
-void LightShow::looping (void)
+void LightShow::looping(void)
 {
 	for (int i = 0; i < Moving::maxNumDots; i++) {
 		changeDirectionLoop(&Moving::dots[i], i);
@@ -165,7 +165,7 @@ void LightShow::looping (void)
 	}
 }
 
-void LightShow::networkAnimation (void)
+void LightShow::networkAnimation(void)
 {
 	int randSide = rand() % 4;
 	int randInd;

@@ -10,12 +10,12 @@ public:
 	/* variables */
 
 	/* functions */
-	static void pride (void);
-	static void staticColor (void);
-	static void matrixVibe (void);
-	static void processorAnimation (void);
-	static void networkAnimation (void);
-	static void looping (void);
+	static void pride(void);
+	static void staticColor(void);
+	static void matrixVibe(void);
+	static void processorAnimation(void);
+	static void networkAnimation(void);
+	static void looping(void);
 };
 
 #endif

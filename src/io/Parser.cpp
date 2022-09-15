@@ -1,7 +1,7 @@
 #include "io/Parser.hpp"
 #include "system/Interface.hpp"
 
-int Parser::parseValue (String cmd)
+int Parser::parseValue(String cmd)
 {
 	int begin = -1;
 	int end = -1;
@@ -22,7 +22,7 @@ int Parser::parseValue (String cmd)
 	return (cmd.substring(begin, end)).toInt();
 }
 
-CRGB Parser::parseColor (String cmd)
+CRGB Parser::parseColor(String cmd)
 {
 	int firstCom = cmd.indexOf(',');
 	int secondCom = cmd.lastIndexOf(',');
@@ -33,7 +33,7 @@ CRGB Parser::parseColor (String cmd)
 	return CRGB(r, g, b);
 }
 
-WallMode Parser::parseWallMode (String cmd)
+WallMode Parser::parseWallMode(String cmd)
 {
 	if (cmd.endsWith(MODE_AUDIO)) return AUDIO_VISUALIZER;
 	else if (cmd.endsWith(MODE_CLOCK_D)) return CLOCK_DIGITAL;
@@ -49,7 +49,7 @@ WallMode Parser::parseWallMode (String cmd)
 	else return (WallMode)(-1);
 }
 
-ColorMode Parser::parseColorMode (String cmd)
+ColorMode Parser::parseColorMode(String cmd)
 {
 	if (cmd.endsWith(COLOR_AVH_H)) return AVH_HORIZONTAL;
 	else if (cmd.endsWith(COLOR_AVH_V)) return AVH_VERTICAL;

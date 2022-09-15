@@ -15,14 +15,14 @@ public:
 	static int maxNumDots;
 
 	/* functions */
-	static void resetDots (void);
-	static void createDot (int x, int y, Direction dir);
-	static void removeDot (Dot* dot);
-	static void autoResetDot (Dot* dot);
-	static void moveDot (Dot* dot);
-	static void updateBuffer (Dot* dot);
-	static void showDot (Dot* dot);
-	static void showDot (Dot* dot, CRGB color);
+	static void resetDots(void);
+	static void createDot(int x, int y, Direction dir);
+	static void removeDot(Dot *dot);
+	static void autoResetDot(Dot *dot);
+	static void moveDot(Dot *dot);
+	static void updateBuffer(Dot *dot);
+	static void showDot(Dot *dot);
+	static void showDot(Dot *dot, CRGB color);
 };
 
 #endif

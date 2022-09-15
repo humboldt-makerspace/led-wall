@@ -9,7 +9,7 @@ Point MessageBoard::displayPosition = {
 CRGB MessageBoard::colorSet[MSG_COL_NUM];
 int MessageBoard::colorIndex = 0;
 
-void MessageBoard::initColorSet (void)
+void MessageBoard::initColorSet(void)
 {
 	colorSet[0] = CRGB::Red;
 	colorSet[1] = CRGB(255, 134, 51);
@@ -20,7 +20,7 @@ void MessageBoard::initColorSet (void)
 	colorSet[6] = CRGB::Violet;
 }
 
-void MessageBoard::clearBoard (void)
+void MessageBoard::clearBoard(void)
 {
 	time = millis();
 	displayPosition.x = 0;
@@ -32,7 +32,7 @@ void MessageBoard::clearBoard (void)
 	}
 }
 
-Format MessageBoard::defineFormat (String msg)
+Format MessageBoard::defineFormat(String msg)
 {
 	Format f = {
 		.endInd1 = -1,
@@ -68,7 +68,7 @@ Format MessageBoard::defineFormat (String msg)
 	return f;
 }
 
-void MessageBoard::showMessage (String msg, int duration)
+void MessageBoard::showMessage(String msg, int duration)
 {
 	if (msg.isEmpty()) return;
 	else if (msg.charAt(0) == '/') return;
@@ -121,7 +121,7 @@ void MessageBoard::showMessage (String msg, int duration)
 	if (finalIndex2 != msg.length()) showMessage(msg.substring(finalIndex2), duration);
 }
 
-void MessageBoard::shiftMessage (String msg)
+void MessageBoard::shiftMessage(String msg)
 {
 	if (msg.isEmpty()) return;
 	clearBoard();
@@ -132,23 +132,23 @@ void MessageBoard::shiftMessage (String msg)
 		colorIndex = 0;
 		for (int i = 0; i < msg.length(); i++) {
 			Figures::displayFigureHard(Figures::charToFigure(msg.charAt(i)),
-							   displayPosition.x + FIGURE_WIDTH * i,
-							   height,
-							   colorSet[colorIndex]);
+									   displayPosition.x + FIGURE_WIDTH * i,
+									   height,
+									   colorSet[colorIndex]);
 			colorIndex == MSG_COL_NUM - 1 ? colorIndex = 0 : colorIndex++;
 			endPoint = displayPosition.x + FIGURE_WIDTH * i;
 		}
 		Figures::displayFigureHard(SPACE,
-							   	   endPoint + FIGURE_WIDTH,
-							   	   height,
-							   	   colorSet[colorIndex]);
+								   endPoint + FIGURE_WIDTH,
+								   height,
+								   colorSet[colorIndex]);
 		displayPosition.x--;
 		FastLED.show();
 		//delay(100);
-	}  
+	}
 }
 
-void MessageBoard::displayTwoWordNumbers (int num1, int num2, int height)
+void MessageBoard::displayTwoWordNumbers(int num1, int num2, int height)
 {
 	String first = Misc::numToWord(num1);
 	String second = Misc::numToWord(num2);

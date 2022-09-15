@@ -1,18 +1,18 @@
 #include "features/Clock.hpp"
 #include "system/Interface.hpp"
 
-tm* Clock::gmtm;
+tm *Clock::gmtm;
 
-void Clock::getTime (void)
+void Clock::getTime(void)
 {
 	time_t now = time(0);
-  	gmtm = localtime(&now);
+	gmtm = localtime(&now);
 }
 
-void Clock::showTimeDigits (void)
-{	
+void Clock::showTimeDigits(void)
+{
 	getTime();
-	
+
 	Figures::displayNumber((BigNumber)(gmtm->tm_hour / 10), HR_1_POS, NUMBER_LEVEL);
 	Figures::displayNumber((BigNumber)(gmtm->tm_hour % 10), HR_2_POS, NUMBER_LEVEL);
 
@@ -27,7 +27,7 @@ void Clock::showTimeDigits (void)
 	Figures::displayNumber((BigNumber)(gmtm->tm_sec % 10), SEC_2_POS, NUMBER_LEVEL);
 }
 
-void Clock::showTimeWords (void)
+void Clock::showTimeWords(void)
 {
 	getTime();
 

@@ -3,7 +3,7 @@
 String inc;
 String lastMsg;
 
-void setup (void)
+void setup(void)
 {
 	Setup::init();
 	AudioVisualizer::flushBuffer();
@@ -11,7 +11,7 @@ void setup (void)
 	AudioVisualizer::init();
 }
 
-void loop (void)
+void loop(void)
 {
 	Interface::readButtons();
 	//inc = UDPManager::readPackage();
@@ -68,7 +68,7 @@ void loop (void)
 			break;
 		}
 	}
-	
+
 	FastLED.show();
 	// int port = 2;
 	// Serial.print("Port: ");

@@ -5,21 +5,21 @@ unsigned int AudioAnalyzer::samplingPeriodUs = round(1000000 * (1.0 / SAMPLING_F
 unsigned long AudioAnalyzer::microseconds;
 unsigned long AudioAnalyzer::newTime, AudioAnalyzer::oldTime;
 byte AudioAnalyzer::peak[] = {0, 0, 0, 0, 0, 0, 0};
-double AudioAnalyzer::vImag[SAMPLES];
-double AudioAnalyzer::vReal[SAMPLES];
+float AudioAnalyzer::vImag[SAMPLES];
+float AudioAnalyzer::vReal[SAMPLES];
 arduinoFFT AudioAnalyzer::FFT = arduinoFFT(AudioAnalyzer::vReal, AudioAnalyzer::vImag, SAMPLES, SAMPLING_FREQUENCY);
 
 // never use sample 0
-void AudioAnalyzer::audioFFT (void)
+void AudioAnalyzer::audioFFT(void)
 {
 	for (int i = 0; i < SAMPLES; i++) {
-    	newTime = micros() - oldTime;
-    	oldTime = newTime;
-    	vReal[i] = analogRead(AUDIO_PIN) - 2900;
-    	vImag[i] = 0;
-    	while (micros() - newTime < samplingPeriodUs);
-  	}
-  	FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-  	FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
-  	FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
+		newTime = micros() - oldTime;
+		oldTime = newTime;
+		vReal[i] = analogRead(AUDIO_PIN) - 2900;
+		vImag[i] = 0;
+		while (micros() - newTime < samplingPeriodUs);
+	}
+	FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+	FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
+	FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
 }

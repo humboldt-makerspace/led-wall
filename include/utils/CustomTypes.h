@@ -20,7 +20,7 @@ typedef struct msgFormat {
 	int endInd1;
 	int endInd2;
 	int pos1;
-	int pos2; 
+	int pos2;
 } Format;
 
 #endif

@@ -7,8 +7,8 @@ class AudioVisualizer {
 private:
 	/* variables */
 	static int bufferCounter[WALL_WIDTH];
-	static double spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
-	static double logBaseAudio;
+	static float spectrumBuffer[WALL_WIDTH][BUFFER_SIZE];
+	static float logBaseAudio;
 	static int samplingRange;
 	static int maxBarHeight;
 	static int maxAmpl;
@@ -17,16 +17,16 @@ private:
 	static int end[WALL_WIDTH];
 
 	/* functions */
-	static void updateBuffer (double value, int pos);
-	static void flattenBuffer (int pos);
-	static double getAvgValue (int pos);
-	static void adjustMaxAmpl (void);
+	static void updateBuffer(float value, int pos);
+	static void flattenBuffer(int pos);
+	static float getAvgValue(int pos);
+	static void adjustMaxAmpl(void);
 
 public:
 	/* functions */
-	static void init (void);
-	static void visualizeAudio (void);
-	static void flushBuffer (void);
+	static void init(void);
+	static void visualizeAudio(void);
+	static void flushBuffer(void);
 };
 
 #endif

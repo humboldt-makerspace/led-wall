@@ -6,13 +6,13 @@ private:
 	/* variables */
 
 	/* functions */
-	static void initWifi (void);
+	static void initWifi(void);
 
 public:
 	/* variables */
 
 	/* functions */
-	static void init (void);
+	static void init(void);
 };
 
 #endif

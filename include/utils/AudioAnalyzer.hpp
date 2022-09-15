@@ -10,15 +10,15 @@ private:
 	static unsigned long microseconds;
 	static unsigned long newTime, oldTime;
 	static byte peak[];
-	static double vImag[SAMPLES];
+	static float vImag[SAMPLES];
 	static arduinoFFT FFT;
-	
+
 public:
 	/* variables */
-	static double vReal[SAMPLES];
+	static float vReal[SAMPLES];
 
 	/* functions */
-	static void audioFFT (void);
+	static void audioFFT(void);
 };
 
 #endif

@@ -11,10 +11,10 @@ public:
 	/* variables */
 
 	/* functions */
-	static int parseValue (String cmd);
-	static CRGB parseColor (String cmd);
-	static WallMode parseWallMode (String cmd);
-	static ColorMode parseColorMode (String cmd);
+	static int parseValue(String cmd);
+	static CRGB parseColor(String cmd);
+	static WallMode parseWallMode(String cmd);
+	static ColorMode parseColorMode(String cmd);
 };
 
 #endif
