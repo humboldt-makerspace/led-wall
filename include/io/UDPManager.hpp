@@ -15,7 +15,7 @@ public:
 
 	/* functions */
 	static String readPackage(void);
-	static void processCommand(String cmd);
+	static void processCommand(String &cmd);
 };
 
 #endif

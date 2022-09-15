@@ -2,7 +2,7 @@
 #include "system/Interface.hpp"
 
 unsigned long MessageBoard::time = 0;
-Point MessageBoard::displayPosition = {
+point_t MessageBoard::displayPosition = {
 	.x = 0,
 	.y = FIRST_ROW_LEVEL
 };
@@ -32,9 +32,9 @@ void MessageBoard::clearBoard(void)
 	}
 }
 
-Format MessageBoard::defineFormat(String msg)
+msg_format_t MessageBoard::defineFormat(String const &msg)
 {
-	Format f = {
+	msg_format_t f = {
 		.endInd1 = -1,
 		.endInd2 = -1,
 		.pos1 = -1,
@@ -68,12 +68,12 @@ Format MessageBoard::defineFormat(String msg)
 	return f;
 }
 
-void MessageBoard::showMessage(String msg, int duration)
+void MessageBoard::showMessage(String const &msg, int duration)
 {
 	if (msg.isEmpty()) return;
 	else if (msg.charAt(0) == '/') return;
 	clearBoard();
-	Format f = defineFormat(msg);
+	msg_format_t f = defineFormat(msg);
 	time = millis();
 	int finalIndex1 = -1;
 	int finalIndex2 = -1;
@@ -121,7 +121,7 @@ void MessageBoard::showMessage(String msg, int duration)
 	if (finalIndex2 != msg.length()) showMessage(msg.substring(finalIndex2), duration);
 }
 
-void MessageBoard::shiftMessage(String msg)
+void MessageBoard::shiftMessage(String const &msg)
 {
 	if (msg.isEmpty()) return;
 	clearBoard();

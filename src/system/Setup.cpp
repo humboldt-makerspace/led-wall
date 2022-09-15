@@ -26,8 +26,8 @@ void initLeds(void)
 
 void initWallStatus(void)
 {
-	Interface::mode = WallMode::AUDIO_VISUALIZER;
-	Interface::cmode = ColorMode::RAINBOW_HORIZONTAL;
+	Interface::mode = wall_mode_t::AUDIO_VISUALIZER;
+	Interface::cmode = color_mode_t::RAINBOW_HORIZONTAL;
 	Interface::brightness = 255;
 	FastLED.setBrightness(255);
 	ColorGradient::changeColorGradient(Interface::cmode);

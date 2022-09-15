@@ -10,19 +10,19 @@ private:
 
 public:
 	/* variables */
-	static Dot dots[MAX_NUM_DOTS];
+	static dot_t dots[MAX_NUM_DOTS];
 	static int activeDots;
 	static int maxNumDots;
 
 	/* functions */
 	static void resetDots(void);
-	static void createDot(int x, int y, Direction dir);
-	static void removeDot(Dot *dot);
-	static void autoResetDot(Dot *dot);
-	static void moveDot(Dot *dot);
-	static void updateBuffer(Dot *dot);
-	static void showDot(Dot *dot);
-	static void showDot(Dot *dot, CRGB color);
+	static void createDot(int x, int y, direction_t dir);
+	static void removeDot(dot_t &dot);
+	static void autoResetDot(dot_t &dot);
+	static void moveDot(dot_t &dot);
+	static void updateBuffer(dot_t &dot);
+	static void showDot(dot_t &dot);
+	static void showDot(dot_t &dot, CRGB const &color);
 };
 
 #endif

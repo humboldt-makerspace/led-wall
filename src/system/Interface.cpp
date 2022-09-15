@@ -4,14 +4,14 @@ boolean Interface::buttons[NUM_BUTTONS];
 CRGB Interface::leds[NUM_DATA_PINS][NUM_LEDS];
 uint8_t Interface::brightness;
 boolean Interface::btnPressed[NUM_BUTTONS];
-WallMode Interface::mode;
-ColorMode Interface::cmode;
+wall_mode_t Interface::mode;
+color_mode_t Interface::cmode;
 
 int Interface::r = 0;
 int Interface::g = 255;
 int Interface::b = 0;
 
-void Interface::ledOn(int x, int y, CRGB color)
+void Interface::ledOn(int x, int y, CRGB const &color)
 {
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
@@ -27,7 +27,7 @@ void Interface::ledOff(int x, int y)
 	leds[block][pos] = CRGB::Black;
 }
 
-void Interface::fadeToColor(int x, int y, CRGB color, uint8_t fadefactor)
+void Interface::fadeToColor(int x, int y, CRGB const &color, uint8_t fadefactor)
 {
 	if (Misc::outOfBounds(x, y)) return;
 	int pos = Mapping::getPos(x, y);
@@ -68,7 +68,7 @@ CRGB Interface::getColor(void)
 	return CRGB(r, g, b);
 }
 
-void Interface::setColor(CRGB color)
+void Interface::setColor(CRGB const &color)
 {
 	r = color.r;
 	g = color.g;
@@ -103,7 +103,7 @@ void initColors(void)
 	}
 }
 
-void initModes(WallMode mode)
+void initModes(wall_mode_t mode)
 {
 	switch (mode) {
 		case LIGHT_SHOW_LOOP: {
@@ -175,17 +175,17 @@ void initModes(WallMode mode)
 
 void Interface::changeMode(void)
 {
-	if (mode == WallMode::AUDIO_VISUALIZER) mode = WallMode::LIGHT_SHOW_PRIDE;
+	if (mode == wall_mode_t::AUDIO_VISUALIZER) mode = wall_mode_t::LIGHT_SHOW_PRIDE;
 	else {
 		int tmp = (int)mode;
 		tmp++;
-		mode = (WallMode)tmp;
+		mode = (wall_mode_t)tmp;
 	}
 	initModes(mode);
 	allLedsOff();
 }
 
-void Interface::setMode(WallMode newMode)
+void Interface::setMode(wall_mode_t newMode)
 {
 	mode = newMode;
 	initModes(mode);
@@ -194,7 +194,7 @@ void Interface::setMode(WallMode newMode)
 
 void Interface::switchColors(void)
 {
-	if (cmode == ColorMode::MONO) {
+	if (cmode == color_mode_t::MONO) {
 		if (g == 255 && r < 255 && !b) r += COLOR_INC;
 		else if (g > 0 && r == 255 && !b) g -= COLOR_INC;
 		else if (r == 255 && b < 255 && !g) b += COLOR_INC;
@@ -209,17 +209,17 @@ void Interface::switchColors(void)
 		if (b > 255) b = 255;
 		else if (b < 0) b = 0;
 
-		if (g == 255 && !r && !b) cmode = ColorMode::RAINBOW_HORIZONTAL;
+		if (g == 255 && !r && !b) cmode = color_mode_t::RAINBOW_HORIZONTAL;
 	}
 	else {
 		int tmp = (int)cmode;
 		tmp++;
-		cmode = (ColorMode)tmp;
+		cmode = (color_mode_t)tmp;
 	}
 	ColorGradient::changeColorGradient(cmode);
 }
 
-void Interface::setColorMode(ColorMode colorMode)
+void Interface::setColorMode(color_mode_t colorMode)
 {
 	cmode = colorMode;
 	ColorGradient::changeColorGradient(cmode);

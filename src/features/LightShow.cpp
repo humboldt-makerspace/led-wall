@@ -58,9 +58,9 @@ void LightShow::matrixVibe(void)
 	int col = rand() % 70;
 	if (col < WALL_WIDTH) Moving::createDot(col, WALL_HEIGHT - 1, DOWN);
 	for (int i = 0; i < Moving::maxNumDots; i++) {
-		Moving::showDot(&Moving::dots[i]);
-		Moving::moveDot(&Moving::dots[i]);
-		Moving::autoResetDot(&Moving::dots[i]);
+		Moving::showDot(Moving::dots[i]);
+		Moving::moveDot(Moving::dots[i]);
+		Moving::autoResetDot(Moving::dots[i]);
 	}
 	delay(40);
 }
@@ -128,40 +128,40 @@ void LightShow::processorAnimation(void)
 	}
 	for (int i = 0; i < Moving::maxNumDots; i++) {
 		if (insideProcessor(Moving::dots[i].p.x, Moving::dots[i].p.y)) {
-			Moving::removeDot(&Moving::dots[i]);
+			Moving::removeDot(Moving::dots[i]);
 		}
 		if (onProcessorEdge(Moving::dots[i].p.x, Moving::dots[i].p.y)) {
-			Moving::showDot(&Moving::dots[i], CRGB::White);
+			Moving::showDot(Moving::dots[i], CRGB::White);
 		}
-		else Moving::showDot(&Moving::dots[i]);
+		else Moving::showDot(Moving::dots[i]);
 
-		Moving::moveDot(&Moving::dots[i]);
-		Moving::autoResetDot(&Moving::dots[i]);
+		Moving::moveDot(Moving::dots[i]);
+		Moving::autoResetDot(Moving::dots[i]);
 	}
 }
 
-void changeDirectionLoop(Dot *dot, int i)
+void changeDirectionLoop(dot_t &dot, int i)
 {
-	if (dot->p.x >= WALL_WIDTH - 1 - i && dot->p.y > 0 + i) {
-		dot->dir = DOWN;
+	if (dot.p.x >= WALL_WIDTH - 1 - i && dot.p.y > 0 + i) {
+		dot.dir = DOWN;
 	}
-	else if (dot->p.y <= 0 + i && dot->p.x > 0 + i) {
-		dot->dir = LEFT;
+	else if (dot.p.y <= 0 + i && dot.p.x > 0 + i) {
+		dot.dir = LEFT;
 	}
-	else if (dot->p.x <= 0 + i && dot->p.y < WALL_HEIGHT - 1 - i) {
-		dot->dir = UP;
+	else if (dot.p.x <= 0 + i && dot.p.y < WALL_HEIGHT - 1 - i) {
+		dot.dir = UP;
 	}
-	else if (dot->p.y >= WALL_HEIGHT - 1 - i && dot->p.x < WALL_WIDTH - 1 - i) {
-		dot->dir = RIGHT;
+	else if (dot.p.y >= WALL_HEIGHT - 1 - i && dot.p.x < WALL_WIDTH - 1 - i) {
+		dot.dir = RIGHT;
 	}
 }
 
 void LightShow::looping(void)
 {
 	for (int i = 0; i < Moving::maxNumDots; i++) {
-		changeDirectionLoop(&Moving::dots[i], i);
-		Moving::showDot(&Moving::dots[i]);
-		Moving::moveDot(&Moving::dots[i]);
+		changeDirectionLoop(Moving::dots[i], i);
+		Moving::showDot(Moving::dots[i]);
+		Moving::moveDot(Moving::dots[i]);
 	}
 }
 
@@ -192,8 +192,8 @@ void LightShow::networkAnimation(void)
 		}
 	}
 	for (int i = 0; i < Moving::maxNumDots; i++) {
-		Moving::showDot(&Moving::dots[i]);
-		Moving::moveDot(&Moving::dots[i]);
-		Moving::autoResetDot(&Moving::dots[i]);
+		Moving::showDot(Moving::dots[i]);
+		Moving::moveDot(Moving::dots[i]);
+		Moving::autoResetDot(Moving::dots[i]);
 	}
 }

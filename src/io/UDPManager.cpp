@@ -18,12 +18,12 @@ String UDPManager::readPackage(void)
 	return myData;
 }
 
-void UDPManager::processCommand(String cmd)
+void UDPManager::processCommand(String &cmd)
 {
 	if (cmd.isEmpty()) return;
 	cmd.toLowerCase();
 	if (cmd.startsWith(CMD_MODE)) {
-		WallMode m = Parser::parseWallMode(cmd);
+		wall_mode_t m = Parser::parseWallMode(cmd);
 		if (m != -1) Interface::setMode(m);
 	}
 	else if (cmd.startsWith(CMD_COLOR)) {
@@ -33,7 +33,7 @@ void UDPManager::processCommand(String cmd)
 			Interface::setColorMode(MONO);
 		}
 		else {
-			ColorMode c = Parser::parseColorMode(cmd);
+			color_mode_t c = Parser::parseColorMode(cmd);
 			if (c != -1) Interface::setColorMode(c);
 		}
 	}

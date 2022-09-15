@@ -13,12 +13,12 @@ public:
 	/* functions */
 	static void defineNumbers(void);
 	static void defineAlphabet(void);
-	static void displayNumber(BigNumber number, int x, int y);
-	static void displayFigure(Figure figure, int x, int y);
-	static void displayFigure(Figure figure, int x, int y, CRGB color);
-	static void displayFigureHard(Figure figure, int x, int y, CRGB color);
+	static void displayNumber(big_number_t number, int x, int y);
+	static void displayFigure(figure_t figure, int x, int y);
+	static void displayFigure(figure_t figure, int x, int y, CRGB const &color);
+	static void displayFigureHard(figure_t figure, int x, int y, CRGB const &color);
 	static void displayColon(int x, int y);
-	static Figure charToFigure(char c);
+	static figure_t charToFigure(char c);
 };
 
 #endif

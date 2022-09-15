@@ -40,23 +40,23 @@ public:
 	static CRGB leds[NUM_DATA_PINS][NUM_LEDS];
 	static uint8_t brightness;
 	static boolean btnPressed[NUM_BUTTONS];
-	static WallMode mode;
-	static ColorMode cmode;
+	static wall_mode_t mode;
+	static color_mode_t cmode;
 
 	/* functions */
 	static void readButtons(void);
-	static void ledOn(int x, int y, CRGB color);
+	static void ledOn(int x, int y, CRGB const &color);
 	static void ledOff(int x, int y);
-	static void fadeToColor(int x, int y, CRGB color, uint8_t fadefactor);
+	static void fadeToColor(int x, int y, CRGB const &color, uint8_t fadefactor);
 	static void allLedsOff(void);
 	static void fadeOutAll(uint8_t fadefactor);
 	static void statusLedOn(void);
 	static void statusLedOff(void);
 	static CRGB getColor(void);
-	static void setMode(WallMode newMode);
+	static void setMode(wall_mode_t newMode);
 	static void setBrightness(uint8_t brightness);
-	static void setColor(CRGB color);
-	static void setColorMode(ColorMode colorMode);
+	static void setColor(CRGB const &color);
+	static void setColorMode(color_mode_t colorMode);
 };
 
 #endif

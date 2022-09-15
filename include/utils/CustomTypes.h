@@ -3,24 +3,24 @@
 
 #include "constants.h"
 
-typedef struct point {
+struct point_t {
 	int x;
 	int y;
-} Point;
+};
 
-typedef struct dot {
-	Point p;
-	Point last[LAST_FIELDS_NUM];
+struct dot_t {
+	point_t p;
+	point_t last[LAST_FIELDS_NUM];
 	int outCounter;
 	int bufferIndex;
-	Direction dir;
-} Dot;
+	direction_t dir;
+};
 
-typedef struct msgFormat {
+struct msg_format_t {
 	int endInd1;
 	int endInd2;
 	int pos1;
 	int pos2;
-} Format;
+};
 
 #endif

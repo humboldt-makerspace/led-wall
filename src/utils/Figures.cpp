@@ -4,7 +4,7 @@
 boolean Figures::alphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];
 boolean Figures::numbers[NUM_BIG_NUM][BIG_NUM_WIDTH][BIG_NUM_HEIGHT];
 
-Figure Figures::charToFigure(char c)
+figure_t Figures::charToFigure(char c)
 {
 	if (isWhitespace(c)) return SPACE;
 	switch (c) {
@@ -630,7 +630,7 @@ void Figures::displayColon(int x, int y)
 	Interface::ledOn(x, y + 3, ColorGradient::colors[x][y + 3]);
 }
 
-void Figures::displayNumber(BigNumber number, int x, int y)
+void Figures::displayNumber(big_number_t number, int x, int y)
 {
 	for (int i = 0; i < BIG_NUM_WIDTH; i++) {
 		for (int j = 0; j < BIG_NUM_HEIGHT; j++) {
@@ -640,7 +640,7 @@ void Figures::displayNumber(BigNumber number, int x, int y)
 	}
 }
 
-void Figures::displayFigure(Figure figure, int x, int y)
+void Figures::displayFigure(figure_t figure, int x, int y)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
@@ -650,7 +650,7 @@ void Figures::displayFigure(Figure figure, int x, int y)
 	}
 }
 
-void Figures::displayFigure(Figure figure, int x, int y, CRGB color)
+void Figures::displayFigure(figure_t figure, int x, int y, CRGB const &color)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {
@@ -660,7 +660,7 @@ void Figures::displayFigure(Figure figure, int x, int y, CRGB color)
 	}
 }
 
-void Figures::displayFigureHard(Figure figure, int x, int y, CRGB color)
+void Figures::displayFigureHard(figure_t figure, int x, int y, CRGB const &color)
 {
 	for (int i = 0; i < FIGURE_WIDTH; i++) {
 		for (int j = 0; j < FIGURE_HEIGHT; j++) {

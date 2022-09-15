@@ -122,7 +122,7 @@
 #define COLOR_TEMP_V			"temperaturev"
 
 /* lists all features of led wall */
-typedef enum modeTypes {
+enum wall_mode_t {
 	LIGHT_SHOW_PRIDE,
 	LIGHT_SHOW_STATIC_COLOR,
 	LIGHT_SHOW_MATRIX_VIBE,
@@ -134,10 +134,10 @@ typedef enum modeTypes {
 	MESSAGE_BOARD,
 	TEST,
 	AUDIO_VISUALIZER
-} WallMode;
+};
 
 /* color modes for bar visualization */
-typedef enum colors {
+enum color_mode_t {
 	RAINBOW_HORIZONTAL,
 	RAINBOW_VERTICAL,
 	RAINBOW_SYMMETRICAL,
@@ -148,21 +148,21 @@ typedef enum colors {
 	TEMPERATURE_HORIZONTAL,
 	TEMPERATURE_VERTICAL,
 	MONO
-} ColorMode;
+};
 
 /* all figures that be displayed on led wall */
-typedef enum figures {
+enum figure_t {
 	N0, N1, N2, N3, N4, N5, N6, N7, N8, N9,
 	A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, EXC, QUEST, SPACE
-} Figure;
+};
 
-typedef enum bigNumbers {
+enum big_number_t {
 	Z0, Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9
-} BigNumber;
+};
 
 /* directions for moving a dot */
-typedef enum directions {
+enum direction_t {
 	UP, DOWN, LEFT, RIGHT, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
-} Direction;
+};
 
 #endif

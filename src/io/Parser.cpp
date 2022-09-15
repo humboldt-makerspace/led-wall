@@ -1,7 +1,7 @@
 #include "io/Parser.hpp"
 #include "system/Interface.hpp"
 
-int Parser::parseValue(String cmd)
+int Parser::parseValue(String const &cmd)
 {
 	int begin = -1;
 	int end = -1;
@@ -22,7 +22,7 @@ int Parser::parseValue(String cmd)
 	return (cmd.substring(begin, end)).toInt();
 }
 
-CRGB Parser::parseColor(String cmd)
+CRGB Parser::parseColor(String const &cmd)
 {
 	int firstCom = cmd.indexOf(',');
 	int secondCom = cmd.lastIndexOf(',');
@@ -33,7 +33,7 @@ CRGB Parser::parseColor(String cmd)
 	return CRGB(r, g, b);
 }
 
-WallMode Parser::parseWallMode(String cmd)
+wall_mode_t Parser::parseWallMode(String const &cmd)
 {
 	if (cmd.endsWith(MODE_AUDIO)) return AUDIO_VISUALIZER;
 	else if (cmd.endsWith(MODE_CLOCK_D)) return CLOCK_DIGITAL;
@@ -46,10 +46,10 @@ WallMode Parser::parseWallMode(String cmd)
 	else if (cmd.endsWith(MODE_STATIC)) return LIGHT_SHOW_STATIC_COLOR;
 	else if (cmd.endsWith(MODE_TEST)) return TEST;
 	else if (cmd.endsWith(MODE_MESSAGE)) return MESSAGE_BOARD;
-	else return (WallMode)(-1);
+	else return (wall_mode_t)(-1);
 }
 
-ColorMode Parser::parseColorMode(String cmd)
+color_mode_t Parser::parseColorMode(String const &cmd)
 {
 	if (cmd.endsWith(COLOR_AVH_H)) return AVH_HORIZONTAL;
 	else if (cmd.endsWith(COLOR_AVH_V)) return AVH_VERTICAL;
@@ -60,5 +60,5 @@ ColorMode Parser::parseColorMode(String cmd)
 	else if (cmd.endsWith(COLOR_SUPERMAN_V)) return SUPERMAN_VERTICAL;
 	else if (cmd.endsWith(COLOR_TEMP_H)) return TEMPERATURE_HORIZONTAL;
 	else if (cmd.endsWith(COLOR_TEMP_V)) return TEMPERATURE_VERTICAL;
-	else return (ColorMode)(-1);
+	else return (color_mode_t)(-1);
 }

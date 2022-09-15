@@ -46,7 +46,7 @@ void fillGradientRGB(CRGB *input, uint16_t startpos, CRGB startcolor, uint16_t e
 	}
 }
 
-void ColorGradient::fillCompleteWall(ColorMode mode)
+void ColorGradient::fillCompleteWall(color_mode_t mode)
 {
 	switch (mode) {
 		case RAINBOW_HORIZONTAL:
@@ -85,7 +85,7 @@ void ColorGradient::fillCompleteWall(ColorMode mode)
 	}
 }
 
-void ColorGradient::changeColorGradient(ColorMode mode)
+void ColorGradient::changeColorGradient(color_mode_t mode)
 {
 	CRGB avhGreen = CRGB(211, 178, 139);
 	CRGB avhBlue = CRGB(203, 128, 219);
