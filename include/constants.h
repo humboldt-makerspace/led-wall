@@ -1,6 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+// esp32 with dual core (not working yet)
+//#define USE_DUAL_CORE
+
 /* data pins for led stripes */
 #define LED_PIN_1               25
 #define LED_PIN_2               26

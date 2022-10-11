@@ -2,6 +2,7 @@
 #define AUDIO_VISUALIZER_HPP
 
 #include "constants.h"
+#include "utils/AudioAnalyzer.hpp"
 
 class AudioVisualizer {
 private:

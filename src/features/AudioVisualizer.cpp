@@ -74,7 +74,12 @@ float AudioVisualizer::getAvgValue(int pos)
 
 void AudioVisualizer::visualizeAudio(void)
 {
+#ifndef USE_DUAL_CORE
 	AudioAnalyzer::audioFFT();
+#else
+	if (!AudioAnalyzer::newDataAvailable) return;
+	AudioAnalyzer::newDataAvailable = false;
+#endif
 
 	float spectrum[WALL_WIDTH];
 	for (int i = 0; i < WALL_WIDTH; i++) {

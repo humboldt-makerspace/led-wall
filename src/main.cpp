@@ -9,6 +9,9 @@ void setup(void)
 	AudioVisualizer::flushBuffer();
 	MessageBoard::initColorSet();
 	AudioVisualizer::init();
+#ifdef USE_DUAL_CORE
+	AudioAnalyzer::fft_task_init();
+#endif
 }
 
 void loop(void)
@@ -70,6 +73,9 @@ void loop(void)
 	}
 
 	FastLED.show();
+#ifdef USE_DUAL_CORE
+	vTaskDelay(1);
+#endif
 	// int port = 2;
 	// Serial.print("Port: ");
 	// Serial.print(port);
